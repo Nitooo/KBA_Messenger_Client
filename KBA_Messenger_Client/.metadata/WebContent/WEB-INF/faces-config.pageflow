@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15297597730750" configfile="/MessengerMaven/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="chatList.xhtml" x="554" y="562" id="pf15297598594051" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf153062645117117 pf153062645117118 pf153062645117119" inlinks="pf15297598594055 pf15297598594056 pf15297598594058 pf15306186439280 pf15306203194932 pf15306239096185 pf15306241684447" path="/chatList.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="addChat.xhtml" x="338" y="178" id="pf15297598594069" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" outlinks="pf15297598594055" inlinks="pf153062645117118" path="/addChat.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="contactList.xhtml" x="338" y="562" id="pf152975985940610" referenceLink="//@navigationRule.6/@navigationCase.1/@toViewId|" outlinks="pf152975985940611 pf15297598594056" inlinks="pf152975985940612 pf153062645117117 pf153062645117120" path="/contactList.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="addContact.xhtml" x="122" y="562" id="pf152975985940613" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf152975985940612 pf153062645117120" inlinks="pf152975985940611" path="/addContact.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="chooseUser.xhtml" x="338" y="1330" id="pf152975985940615" referenceLink="//@navigationRule.6/@navigationCase.1/@toViewId|" outlinks="pf15297598594058 pf152975985940616 pf15297761934172" inlinks="pf152975985940617 pf152975985940618 pf15297761934172" path="/chooseUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="addUser.xhtml" x="122" y="1330" id="pf152975985940619" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf152975985940617 pf152975985940618" inlinks="pf152975985940616" path="/addUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="addGroupChat.xhtml" id="pf15306186439281" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" outlinks="pf15306186439280" inlinks="pf153062645117119" path="/addGroupChat.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editChat.xhtml" id="pf15306203194933" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf15306203194932" path="/editChat.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="showChatMessages.xhtml" id="pf15306239096186" referenceLink="//@navigationRule.9/@navigationCase.1/@toViewId|" outlinks="pf15306239096185" path="/showChatMessages.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="showChat.xhtml" id="pf15306241684448" referenceLink="//@navigationRule.11/@fromViewId|" outlinks="pf15306241684447" path="/showChat.xhtml"/>
+  <links id="pf15297598594055" target="pf15297598594051" source="pf15297598594069" outcome="cancel" redirect="true"/>
+  <links id="pf152975985940611" target="pf152975985940613" source="pf152975985940610" outcome="addContact" redirect="true"/>
+  <links id="pf15297598594056" target="pf15297598594051" source="pf152975985940610" outcome="back" redirect="true"/>
+  <links id="pf152975985940612" target="pf152975985940610" source="pf152975985940613" outcome="cancel" redirect="true"/>
+  <links id="pf15297598594058" target="pf15297598594051" source="pf152975985940615" outcome="success" redirect="true"/>
+  <links id="pf152975985940616" target="pf152975985940619" source="pf152975985940615" outcome="addUser" redirect="true"/>
+  <links id="pf152975985940617" target="pf152975985940615" source="pf152975985940619" outcome="success" redirect="true"/>
+  <links id="pf152975985940618" target="pf152975985940615" source="pf152975985940619" outcome="cancel" redirect="true"/>
+  <links id="pf15297761934172" target="pf152975985940615" source="pf152975985940615" outcome="successDelete" redirect="true"/>
+  <links id="pf15306186439280" target="pf15297598594051" source="pf15306186439281" outcome="cancel" redirect="true"/>
+  <links id="pf15306203194932" target="pf15297598594051" source="pf15306203194933" outcome="cancel" redirect="true"/>
+  <links id="pf15306239096185" target="pf15297598594051" source="pf15306239096186" outcome="back" redirect="true"/>
+  <links id="pf15306241684447" target="pf15297598594051" source="pf15306241684448" outcome="cancel" redirect="true"/>
+  <links id="pf153062645117117" target="pf152975985940610" source="pf15297598594051" outcome="showContact" redirect="true"/>
+  <links id="pf153062645117118" target="pf15297598594069" source="pf15297598594051" outcome="addChat" redirect="true"/>
+  <links id="pf153062645117119" target="pf15306186439281" source="pf15297598594051" outcome="addGroupChat" redirect="true"/>
+  <links id="pf153062645117120" target="pf152975985940610" source="pf152975985940613" outcome="success" redirect="true"/>
+</pageflow:Pageflow>

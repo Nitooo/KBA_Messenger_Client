@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<f:facet name="header">
+			<h:outputText value="Menue" />
+		</f:facet>
+
+		<h:panelGrid id="panel" columns="1">
+			<p:commandLink value="Kontakte"
+				action="contactList.xhtml?faces-redirect=true"
+				rendered="#{userBean.user.username ne null}" />
+			<p:separator />
+			<p:commandLink value="Logout #{userBean.user.username}" action="#{userBean.logout}" update="panel" />		
+
+		</h:panelGrid>
+	</h:form>
+
+</ui:composition>

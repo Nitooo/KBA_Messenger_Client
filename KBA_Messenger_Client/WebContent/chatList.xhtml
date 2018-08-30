@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/META-INF/templates/projektTemplate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:param name="title" value="Messenger - Chatliste" />
+	<ui:define name="content">
+		<h2>
+			<h:outputText value="Chatliste" />
+		</h2>
+		<h:form id="form">
+							 
+			<p:button value="Kontakte anzeigen " id="contact" action="#{contactsBean.loadContactList}"
+							 outcome="showContact" icon="ui-icon-circle-plus"  />
+
+			<p></p>
+			<p:messages id="errorMessages" style="color:red;margin:8px;" />
+			<p:panel header="Waehlen Sie einen Chat #{userBean.user.username}"
+				style="margin-bottom:10px;">
+
+				<p:dataTable value="#" var="" border="1" cellpadding="10"
+				cellspacing="1">
+					<p:column>
+						<f:facet name="header">Gruppenchat</f:facet>
+	                   
+	                </p:column>
+	
+					<p:column>
+						<f:facet name="header">Aktion</f:facet>
+						<p:commandButton action="#" id="oeffnen"
+										 icon="	ui-icon-comment" title="Messenger öfnnen" />
+						<h:outputText value=" | " />
+						<p:commandButton action="#" id="show"
+										 icon="	ui-icon-search" title="Einstellung anzeigen" />
+						<p:commandButton action="#" id="edit"
+										 icon="	ui-icon-gear" title="Einstellung ändern" />
+						<h:outputText value=" | " />
+						<p:commandButton action="#" id="löschen"
+										 icon="ui-icon-trash" title="Chat löschen" />
+					</p:column>
+				</p:dataTable>
+				
+				
+				<p:button value="Gruppenchat hinzufügen" id="addGroupChat"
+							 action="" outcome="addGroupChat" icon="ui-icon-circle-plus"  />
+				
+				<p:separator style="height:10px" />
+				
+				<p:dataTable value="#" var="" border="1" cellpadding="10"
+				cellspacing="1">
+					<p:column>
+						<f:facet name="header">Chat</f:facet>
+	                    #{contact.contactId}
+	                </p:column>
+	
+					<p:column>
+						<f:facet name="header">Aktion</f:facet>
+						<p:commandButton action="#" id="oeffnen"
+										 icon="	ui-icon-comment" title="Messenger öfnnen" />
+						<h:outputText value=" | " />
+						<p:commandButton action="#" id="löschen"
+										 icon="ui-icon-trash" title="Chat löschen" />
+					</p:column>
+				
+				</p:dataTable>
+				
+				
+				<p:button value="Chat hinzufügen" id="addChat"
+							 action="" outcome="addChat" icon="ui-icon-circle-plus"  />
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/META-INF/templates/projektTemplate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="title" value="Messenger - Chat" />
+
+	<ui:define name="content">
+
+		<h2>
+			<h:outputText value="Chat" />
+		</h2>
+		
+		<p:button value="Zurück" id="back"
+							 outcome="back" icon="ui-icon-arrowthick-1-w"  />
+		<h:form>
+			<p:layout style="min-width:300px;min-height:300px;" >
+
+				<p:layoutUnit position="center" header="Test #{chatListBean.chat}">
+					<ui:repeat value="#{chatBean.messageList}" var="message">
+						   #{message} <br />
+					</ui:repeat> 
+					<div id="bottomDiv"></div>
+				</p:layoutUnit>
+
+
+				<p:layoutUnit position="south">
+					<h:form id="sendMessage">
+						<p:panelGrid columns="2">
+							<p:inputText id="messageInput" label="Message Input" size="50" value="#{chatBean.message}"/>
+							<p:commandButton value="Senden"
+								action="#{chatBean.sendMessage}"
+								update="@form" 
+								oncomplete="scrollToBottom()"/>
+								
+						</p:panelGrid>
+					</h:form>
+				</p:layoutUnit>
+
+			</p:layout>
+		</h:form>
+		
+		
+		<script type="text/javascript">             
+			function scrollToBottom() {
+				window.location.hash = '#bottomDiv';
+			}
+		</script>
+		
+
+	</ui:define>
+
+</ui:composition>

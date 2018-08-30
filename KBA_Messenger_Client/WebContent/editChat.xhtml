@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/META-INF/templates/projektTemplate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="title" value="Messenger - Chat anpassen" />
+
+	<ui:define name="content">
+		<h2>
+			<h:outputText value="Chat anpassen" />
+		</h2>
+		
+		<h:form id="form">
+		<p:messages id="errorMessages" style="color:red;margin:8px;" />
+			<p:panelGrid id="borderGrid" columns="1" layout="grid">
+			   	<f:facet name="header">
+                    <h:outputText value="Chat anpassen"/>
+                </f:facet>
+                
+                <p:spacer height="10" />
+                
+                <p:panelGrid id="borderNameGrid" columns="1">
+				   	<f:facet name="header">
+	                    <h:outputText value="Chatname anpassen"/>
+	                </f:facet>
+	                
+					<p:panelGrid id="editChatGrid" columns="3" styleClass="noborderpanelgrid">
+						<p:outputLabel for="chatname" value="Chatname" />
+						<p:inputText maxlength="64" id="chatname" value="" />
+						<p:commandButton id="saveChatName" action="#"
+								value="Chatname ändern" icon="ui-icon-disk" update="@form" />
+					</p:panelGrid>
+					
+				</p:panelGrid>
+					
+				<p:spacer height="10" />
+					
+				<p:panelGrid id="borderUserGrid" columns="1">
+					<f:facet name="header">
+                    	<h:outputText value="User anpassen"/>
+                	</f:facet>
+                	
+					<p:panelGrid columns="3" styleClass="noborderpanelgrid">
+						<p:outputLabel for="user" value="Chatusers: " />
+						<p:selectOneMenu id="user" value=""
+							style="width:150px">
+							<f:selectItem itemLabel="User im Chat" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="" var="user"
+								itemLabel="" itemValue="" />
+						</p:selectOneMenu>
+						<p:commandButton id="deleteChatUser" action="#"
+								value="User entfernen" icon="ui-icon-disk" update="@form" />
+						
+						
+						<p:outputLabel for="addUser" value="Username" />
+						<p:inputText maxlength="64" id="addUser" value="" />
+						<p:commandButton id="addChatUser" action="#"
+								value="User hinzufügen" icon="ui-icon-disk" update="@form" />
+					</p:panelGrid>
+					
+					
+				</p:panelGrid>
+					
+				<p:spacer height="10" />
+					
+				<p:panelGrid id="borderAdminGrid" columns="1">
+					<f:facet name="header">
+                    	<h:outputText value="Adminrechte anpassen"/>
+                	</f:facet>
+					
+					<p:panelGrid columns="3" styleClass="noborderpanelgrid">
+						<p:outputLabel for="admin" value="User mit Adminrechten: " />
+						<p:selectOneMenu id="admin" value=""
+							style="width:150px">
+							<f:selectItem itemLabel="Admin im Chat" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="" var="admin"
+								itemLabel="" itemValue="" />
+						</p:selectOneMenu>
+						<p:commandButton id="deleteChatAdmin" action="#"
+								value="Adminrechte entfernen" icon="ui-icon-disk" update="@form" />
+								
+								
+						<p:outputLabel for="addAdmin" value="Admin" />
+						<p:inputText maxlength="64" id="addAdmin" value="" />
+						<p:commandButton id="addChatAdmin" action="#"
+								value="Admin hinzufügen" icon="ui-icon-disk" update="@form" />
+					</p:panelGrid>
+					
+					</p:panelGrid>
+					
+					<p:spacer height="10" />
+					
+					<p:panelGrid colums="2">
+							
+			
+						<p:button id="cancel" 
+							value="Zurück" outcome="cancel" immediate="true" icon="ui-icon-close" />
+				</p:panelGrid>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

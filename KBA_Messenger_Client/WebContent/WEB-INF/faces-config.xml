@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    
+    
+    <application>
+    	<el-resolver>
+      		org.springframework.web.jsf.el.SpringBeanFacesELResolver
+    	</el-resolver>
+	</application>
+    
+     <navigation-rule>
+	   <from-view-id>/chatList.xhtml</from-view-id>
+	   <navigation-case>
+	       <from-outcome>showContact</from-outcome>
+	       <to-view-id>/contactList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>addChat</from-outcome>
+	       <to-view-id>/addChat.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>addGroupChat</from-outcome>
+	       <to-view-id>/addGroupChat.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+	   <from-view-id>/addChat.xhtml</from-view-id>
+	   <navigation-case>
+	       <from-outcome>cancel</from-outcome>
+	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+	   <from-view-id>/addGroupChat.xhtml</from-view-id>
+	   <navigation-case>
+	       <from-outcome>cancel</from-outcome>
+	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+	   <from-view-id>/editChat.xhtml</from-view-id>
+	   <navigation-case>
+	       <from-outcome>cancel</from-outcome>
+	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+	   <from-view-id>/contactList.xhtml</from-view-id>
+	   <navigation-case>
+	       <from-outcome>addContact</from-outcome>
+	       <to-view-id>/addContact.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>back</from-outcome>
+	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+	   <from-view-id>/addContact.xhtml</from-view-id>
+	   <navigation-case>
+	       <from-outcome>cancel</from-outcome>
+	       <to-view-id>/contactList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>success</from-outcome>
+	       <to-view-id>/contactList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+	   <from-view-id>/showChatMessages.xhtml</from-view-id>
+	   <navigation-case>
+	       <from-outcome>back</from-outcome>
+	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+	   <from-view-id>/chooseUser.xhtml</from-view-id>
+	   <navigation-case>
+	       <from-outcome>success</from-outcome>
+	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>addUser</from-outcome>
+	       <to-view-id>/addUser.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>successDelete</from-outcome>
+	       <to-view-id>/chooseUser.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+	   <from-view-id>/addUser.xhtml</from-view-id>
+	   <navigation-case>
+	       <from-outcome>success</from-outcome>
+	       <to-view-id>/chooseUser.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>cancel</from-outcome>
+	       <to-view-id>/chooseUser.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+	<from-view-id>/showChat.xhtml</from-view-id>
+	   <navigation-case>
+	       <from-outcome>cancel</from-outcome>
+	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>

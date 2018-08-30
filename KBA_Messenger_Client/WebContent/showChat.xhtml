@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/META-INF/templates/projektTemplate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="title" value="Messenger - Chat anpassen" />
+
+	<ui:define name="content">
+		<h2>
+			<h:outputText value="Gruppenchat" />
+		</h2>
+		
+		<h:form id="form">
+		<p:messages id="errorMessages" style="color:red;margin:8px;" />
+			<p:panelGrid id="borderGrid" columns="1" layout="grid">
+			   	<f:facet name="header">
+                    <h:outputText value="Chat"/>
+                </f:facet>
+                
+                <p:spacer height="10" />
+                
+                <p:panelGrid id="borderNameGrid" columns="1">
+				   	<f:facet name="header">
+	                    <h:outputText value="Chatname"/>
+	                </f:facet>
+	                
+					<p:panelGrid id="editChatGrid" columns="3" styleClass="noborderpanelgrid">
+						<p:outputLabel value="Chatname" />
+						<p:outputLabel value="Dummyname in der Gui" />
+					</p:panelGrid>
+					
+				</p:panelGrid>
+					
+				<p:spacer height="10" />
+					
+				<p:panelGrid id="borderUserGrid" columns="1">
+					<f:facet name="header">
+                    	<h:outputText value="User"/>
+                	</f:facet>
+                	
+					<p:panelGrid columns="3" styleClass="noborderpanelgrid">
+						<p:outputLabel for="user" value="Chatusers: " />
+						<p:selectOneMenu id="user" value=""
+							style="width:150px">
+							<f:selectItem itemLabel="User im Chat" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="" var="user"
+								itemLabel="" itemValue="" />
+						</p:selectOneMenu>
+						
+					</p:panelGrid>
+					
+					
+				</p:panelGrid>
+					
+				<p:spacer height="10" />
+					
+				<p:panelGrid id="borderAdminGrid" columns="1">
+					<f:facet name="header">
+                    	<h:outputText value="Admin"/>
+                	</f:facet>
+					
+					<p:panelGrid columns="3" styleClass="noborderpanelgrid">
+						<p:outputLabel for="admin" value="User mit Adminrechten: " />
+						<p:selectOneMenu id="admin" value=""
+							style="width:150px">
+							<f:selectItem itemLabel="Admin im Chat" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="" var="admin"
+								itemLabel="" itemValue="" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+					
+					</p:panelGrid>
+					
+					<p:spacer height="10" />
+					
+					<p:panelGrid colums="2">
+							
+			
+						<p:button id="cancel" 
+							value="Zurück" outcome="cancel" immediate="true" icon="ui-icon-close" />
+				</p:panelGrid>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

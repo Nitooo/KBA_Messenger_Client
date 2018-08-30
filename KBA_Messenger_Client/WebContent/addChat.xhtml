@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/META-INF/templates/projektTemplate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="title" value="Messenger - Chatliste" />
+
+	<ui:define name="content">
+		<h2>
+			<h:outputText value="Chat hinzufügen" />
+		</h2>
+		
+		<h:form id="form">
+		<p:messages id="errorMessages" style="color:red;margin:8px;" />
+			<p:panelGrid id="borderGrid" columns="1">
+			   	<f:facet name="header">
+                    <h:outputText value="neuer Chat"/>
+                </f:facet>
+				<p:panelGrid id="chatAddGrid" columns="2" styleClass="noborderpanelgrid">
+					<p:outputLabel for="username" value="Username" />
+					<p:inputText required="true" maxlength="64" id="username"
+						value="" />
+					
+					<p></p>
+					<h:outputText id="display" />
+					
+					<p></p>
+					<p:panelGrid colums="2">
+					
+						<p:commandButton id="save" action="#"
+							value="Speichern" icon="ui-icon-disk" update="@form" />
+			
+						<p:button id="cancel" 
+							value="Abbrechen" outcome="cancel" immediate="true" icon="ui-icon-close" />
+
+					</p:panelGrid>
+				</p:panelGrid>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
