@@ -22,11 +22,9 @@
                 </f:facet>
 				<p:panelGrid id="userGrid" columns="2" styleClass="noborderpanelgrid">
 					<p:outputLabel for="userName" value="Username" />
-					<p:inputText required="true" maxlength="64" id="userName"
-						value="#{addUserBean.username}" />
+					<p:inputText required="true" maxlength="64" id="userName"/>
 					<p:outputLabel for="password" value="Passwort" />
-					<p:inputText required="true" maxlength="64" id="password"
-						value="#{addUserBean.password}" />
+					<p:inputText required="true" maxlength="64" id="password"/>
 					
 					<p></p>
 					<h:outputText id="display" />
@@ -34,7 +32,7 @@
 					<p></p>
 					<p:panelGrid colums="2">
 					
-						<p:commandButton id="save" action="#{addUserBean.save}"
+						<p:commandButton id="save" action="#{userBean.addUser(userName,password)}"
 							value="Speichern" icon="ui-icon-disk" update="@form" />
 			
 						<p:button id="cancel" 

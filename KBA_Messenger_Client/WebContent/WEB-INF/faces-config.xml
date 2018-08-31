@@ -37,11 +37,21 @@
 	       <to-view-id>/chatList.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+	       <from-outcome>successAddChat</from-outcome>
+	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 	   <from-view-id>/addGroupChat.xhtml</from-view-id>
 	   <navigation-case>
 	       <from-outcome>cancel</from-outcome>
+	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>successAddGroupChat</from-outcome>
 	       <to-view-id>/chatList.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>

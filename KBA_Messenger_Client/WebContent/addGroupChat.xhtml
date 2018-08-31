@@ -22,8 +22,7 @@
                 </f:facet>
 				<p:panelGrid id="fehlerGrid" columns="2" styleClass="noborderpanelgrid">
 					<p:outputLabel for="chatname" value="Chatname" />
-					<p:inputText required="true" maxlength="64" id="chatname"
-						value="" />
+					<p:inputText required="true" maxlength="64" id="chatname"/>
 					
 					<p></p>
 					<h:outputText id="display" />
@@ -31,7 +30,7 @@
 					<p></p>
 					<p:panelGrid colums="2">
 					
-						<p:commandButton id="save" action="#"
+						<p:commandButton id="save" action="#{chatBean.addGroupChat(chatname)}"
 							value="Speichern" icon="ui-icon-disk" update="@form" />
 			
 						<p:button id="cancel" 

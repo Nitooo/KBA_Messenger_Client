@@ -20,7 +20,7 @@
 			<p:panel header="Waehlen Sie einen Chat #{userBean.user.username}"
 				style="margin-bottom:10px;">
 
-				<p:dataTable value="#" var="" border="1" cellpadding="10"
+				<p:dataTable var="chat" value="#{chatBean.chatList}" border="1" cellpadding="10"
 				cellspacing="1">
 					<p:column>
 						<f:facet name="header">Gruppenchat</f:facet>
@@ -31,7 +31,7 @@
 						<f:facet name="header">Aktion</f:facet>
 						<p:commandButton action="#" id="oeffnen"
 										 icon="	ui-icon-comment" title="Messenger öfnnen" />
-						<h:outputText value=" | " />
+						<h:outputText value="#{chat.name}" />
 						<p:commandButton action="#" id="show"
 										 icon="	ui-icon-search" title="Einstellung anzeigen" />
 						<p:commandButton action="#" id="edit"

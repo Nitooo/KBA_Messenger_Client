@@ -102,6 +102,10 @@ public class UserBean implements Serializable{
   	public void setUser(User user) {
   		this.user = user;
   	}
+  	
+  	public void addUser(String username, String passwort) {
+  		userManagement.addUser(username, passwort);
+  	}
 
     
 }

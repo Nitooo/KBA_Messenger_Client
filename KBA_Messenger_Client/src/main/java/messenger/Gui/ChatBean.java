@@ -11,44 +11,37 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
+import messenger.Domain.Chat;
 import messenger.ServiceAdapter.CommunicationAdapter;
 import messenger.ServiceAdapter.ManageChatGroupsAdapter;
 
 
 @Component
-@Scope("session")
+@Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ChatBean implements Serializable{
-	private static final long serialVersionUID = 1L;
 	
-	//@ManagedProperty("#{userBean}")
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Autowired
 	private UserBean userBean;
-    
-//	@ManagedProperty("#{chatBeanList}")
-//    private ChatListBean chatBeanList;
 
 	@Autowired
 	private ManageChatGroupsAdapter manageChatGroups;
 	
-	@Autowired
-    private CommunicationAdapter communication;
-    
-    private String[][] arrayMessages;
-    
-    private String message;
-    
-    private Long chatId;
-
-	private List<Long> chatList = new ArrayList<Long>();
-    
-    private List<String> messageList = new ArrayList<String>();
+	private List<Chat> chatList;
+	
+	private Chat newChat;
     
     @PostConstruct
     private void init() {
-    	//chatList = manageChatGroups.getAllConversations(userBean.getUserId());
+    	setChatList(userBean.getUser().getChats());
     }
     
     public ManageChatGroupsAdapter getManageChatGroups() {
@@ -59,78 +52,29 @@ public class ChatBean implements Serializable{
 		this.manageChatGroups = manageChatGroups;
 	}
 
-	public Long getChatId() {
-		return chatId;
-	}
-
-	public void setChatId(Long chatId) {
-		this.chatId = chatId;
-	}
-
-	public List<Long> getChatList() {
-		return chatList;
-	}
-
-	public void setChatList(List<Long> chatList) {
-		this.chatList = chatList;
-	}
-
 	public UserBean getUserBean() {
 		return userBean;
 	}
 
 
+	public List<Chat> getChatList() {
+		return chatList;
+	}
+
+	public Chat getChat() {
+		return newChat;
+	}
+
+	public void setChat(Chat chat) {
+		this.newChat = chat;
+	}
+
+	public void setChatList(List<Chat> chatList) {
+		this.chatList = chatList;
+	}
+
 	public void setUserBean(UserBean userBean) {
 		this.userBean = userBean;
-	}
-
-
-	public CommunicationAdapter getCommunication() {
-		return communication;
-	}
-
-
-	public void setCommunication(CommunicationAdapter communication) {
-		this.communication = communication;
-	}
-
-
-	public String[][] getArrayMessages() {
-		return arrayMessages;
-	}
-
-
-	public void setArrayMessages(String[][] arrayMessages) {
-		this.arrayMessages = arrayMessages;
-	}
-
-
-	public String getMessage() {
-		return message;
-	}
-
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-
-	public List<String> getMessageList() {
-		return messageList;
-	}
-
-
-	public void setMessageList(List<String> messageList) {
-		this.messageList = messageList;
-	}
-    
-	
-	public void sendMessage(){
-		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-		Date date = new Date();
-		
-		//messageList.add(userBean.getUsername() + " - " + dateFormat.format(date) + " - " + message);
-		this.message = "";
 	}
 	
 	public List<Long> getAllConversations(Long userId) {
@@ -140,5 +84,23 @@ public class ChatBean implements Serializable{
 
     public String showChat() {
         return "success";
+    }
+    
+    public String addGroupChat(String chatName) {
+    	newChat = new Chat();
+    	newChat.setName(chatName);
+    	newChat.setAdmin(userBean.getUser());
+    	newChat.setGroupChat(true);
+    	manageChatGroups.addConversation(newChat);
+    	return "successAddGroupChat";
+    }
+    
+    public String addChat(String chatName) {
+    	newChat = new Chat();
+    	newChat.setName(chatName);
+    	newChat.setAdmin(userBean.getUser());
+    	newChat.setGroupChat(false);
+    	manageChatGroups.addConversation(newChat);
+    	return "successAddChat";
     }
 }
