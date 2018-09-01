@@ -73,22 +73,9 @@ public class AddUserBean implements Serializable{
 		this.userManagement = userManagement;
 	}
 	
-	public String save() {
-		
-		if(username != null && password != null) 
-		{
-			int result = userManagement.addUser(username, password);
-			if(result == 0){
-				userBean.init();
-				return "success";
-			} else {
-				return "fail";
-			}
-			 
-		} else {
-			return "fail";
-		}
-		
-	}
+  	public void addUser() {
+  		userManagement.addUser(username, password);
+  	}
+
 
 }
