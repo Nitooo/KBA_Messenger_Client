@@ -22,7 +22,7 @@ import messenger.ServiceAdapter.ManageChatGroupsAdapter;
 
 @Component
 @Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class ChatBean implements Serializable{
+public class AddChatBean implements Serializable{
 	
 	/**
 	 * 
@@ -35,16 +35,17 @@ public class ChatBean implements Serializable{
 	@Autowired
 	private ManageChatGroupsAdapter manageChatGroups;
 	
-	private List<Chat> chatList;
-	
-	private Chat newChat;
+	String chatname;
     
-    @PostConstruct
-    private void init() {
-    	chatList = userBean.getUser().getChats();
-    }
-    
-    public ManageChatGroupsAdapter getManageChatGroups() {
+    public String getChatname() {
+		return chatname;
+	}
+
+	public void setChatname(String chatname) {
+		this.chatname = chatname;
+	}
+
+	public ManageChatGroupsAdapter getManageChatGroups() {
 		return manageChatGroups;
 	}
 
@@ -55,49 +56,14 @@ public class ChatBean implements Serializable{
 	public UserBean getUserBean() {
 		return userBean;
 	}
-
-
-	public List<Chat> getChatList() {
-		return chatList;
-	}
-
-	public Chat getChat() {
-		return newChat;
-	}
-
-	public void setChat(Chat chat) {
-		this.newChat = chat;
-	}
-
-	public void setChatList(List<Chat> chatList) {
-		this.chatList = chatList;
-	}
-
-	public void setUserBean(UserBean userBean) {
-		this.userBean = userBean;
-	}
-	
-	public List<Long> getAllConversations(Long userId) {
-		//return manageChatGroups.getAllConversations(userId);
-		return null;
-	}
-
-    public String showChat() {
-        return "success";
-    }
     
-    public String addGroupChat(String chatName) {
-    	chatName = "Testname";
-    	manageChatGroups.addGroupConversation(userBean.getUser(),chatName);
+    public String addGroupConversation() {
+    	manageChatGroups.addGroupConversation(userBean.getUser(),this.chatname);
     	return "successAddGroupChat";
     }
     
-    public String addChat(String chatName) {
-    	newChat = new Chat();
-    	newChat.setName(chatName);
-    	newChat.setAdmin(userBean.getUser());
-    	newChat.setGroupChat(false);
-    	//manageChatGroups.addConversation(newChat);
+    public String addConversation() {
+    	manageChatGroups.addConversation(userBean.getUser());
     	return "successAddChat";
     }
 }

@@ -18,20 +18,18 @@
 		<p:messages id="errorMessages" style="color:red;margin:8px;" />
 			<p:panelGrid id="borderGrid" columns="1">
 			   	<f:facet name="header">
-                    <h:outputText value="neuer Chat"/>
+                    <h:outputText value="Chat hinzufügen"/>
                 </f:facet>
 				<p:panelGrid id="chatAddGrid" columns="2" styleClass="noborderpanelgrid">
-					<p:outputLabel for="chatname" value="Chatname" />
-					<p:inputText required="true" maxlength="64" id="chatname"/>
-					
+					<p:outputLabel value="Wollen Sie einen neuen Chat hinzufügen?" />
 					<p></p>
 					<h:outputText id="display" />
 					
 					<p></p>
 					<p:panelGrid colums="2">
 					
-						<p:commandButton id="save" action="#{chatBean.addChat(chatname)}"
-							value="Speichern" icon="ui-icon-disk" update="@form" />
+						<p:commandButton id="save" action="#{addChatBean.addConversation}"
+							value="OK" icon="ui-icon-disk" update="@form" />
 			
 						<p:button id="cancel" 
 							value="Abbrechen" outcome="cancel" immediate="true" icon="ui-icon-close" />

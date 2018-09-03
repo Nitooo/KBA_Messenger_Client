@@ -18,11 +18,11 @@
 		<p:messages id="errorMessages" style="color:red;margin:8px;" />
 			<p:panelGrid id="borderGrid" columns="1">
 			   	<f:facet name="header">
-                    <h:outputText value="neuer Chat"/>
+                    <h:outputText value="Gruppenchat hinzufügen"/>
                 </f:facet>
-				<p:panelGrid id="fehlerGrid" columns="2" styleClass="noborderpanelgrid">
+				<p:panelGrid id="addChatGrid" columns="2" styleClass="noborderpanelgrid">
 					<p:outputLabel for="chatname" value="Chatname" />
-					<p:inputText required="true" maxlength="64" id="chatname"/>
+					<p:inputText required="true" maxlength="64" id="chatname" value="#{addChatBean.chatname}"/>
 					
 					<p></p>
 					<h:outputText id="display" />
@@ -30,8 +30,8 @@
 					<p></p>
 					<p:panelGrid colums="2">
 					
-						<p:commandButton id="save" action="#{chatBean.addGroupChat(chatname)}"
-							value="Speichern" icon="ui-icon-disk" update="@form" />
+						<p:commandButton id="save" action="#{addChatBean.addGroupConversation}"
+							value="Ok" icon="ui-icon-disk" update="@form" />
 			
 						<p:button id="cancel" 
 							value="Abbrechen" outcome="cancel" immediate="true" icon="ui-icon-close" />

@@ -42,28 +42,6 @@ public class UserBean implements Serializable{
     	userList = Arrays.asList(userManagement.getAllUsers());
     }
 
-    
-    public String save(User user){
-    	//user = userManagement.getUser(user);
-    	this.user = user;
-    	return "success";
-    }
-    
-    public String deleteUser(){
-    	userManagement.deleteUser(user);
-    	this.logout();
-    	this.init();
-    	return "successDelete";
-    }
-    
-    public String logout(){
-    	FacesContext
-		.getCurrentInstance()
-		.getExternalContext()
-		.invalidateSession();
-    	return "chooseUser?faces-redirect=true";
-    }
-
     public UserManagementAdapter getUserManagement() {
   		return userManagement;
   	}
@@ -98,9 +76,26 @@ public class UserBean implements Serializable{
   		return user;
   	}
 
-
-  	public void setUser(User user) {
-  		this.user = user;
+  	
+  	public String setUser(User user){
+    	this.user = user;
+    	return "success";
+    }
+  	
+  	public String deleteUser(User user) {
+  		userManagement.deleteUser(user);
+    	this.logout();
+    	this.init();
+    	return "successDelete";
   	}
+  	
+  	public String logout(){
+    	FacesContext
+		.getCurrentInstance()
+		.getExternalContext()
+		.invalidateSession();
+    	return "chooseUser?faces-redirect=true";
+    }
+
     
 }

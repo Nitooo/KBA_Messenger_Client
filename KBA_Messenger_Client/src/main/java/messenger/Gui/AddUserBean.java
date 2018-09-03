@@ -73,8 +73,10 @@ public class AddUserBean implements Serializable{
 		this.userManagement = userManagement;
 	}
 	
-  	public void addUser() {
+  	public String addUser() {
   		userManagement.addUser(username, password);
+  		userBean.init();
+  		return "success";
   	}
 
 
