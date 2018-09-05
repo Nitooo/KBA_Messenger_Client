@@ -23,7 +23,7 @@
 				<p:panelGrid id="contactAddGrid" columns="2" styleClass="noborderpanelgrid">
 					<p:outputLabel for="contactName" value="Kontaktname" />
 					<p:inputText required="true" maxlength="64" id="contactName"
-						value="#{contactsBean.contactName}" />
+						value="#{addContactsBean.contactName}" />
 					
 					<p></p>
 					<h:outputText id="display" />
@@ -31,7 +31,7 @@
 					<p></p>
 					<p:panelGrid colums="2">
 					
-						<p:commandButton id="save" action="#{contactsBean.addContact}"
+						<p:commandButton id="save" action="#{addContactsBean.addContact}"
 							value="Speichern" icon="ui-icon-disk" update="@form" />
 			
 						<p:button id="cancel" 
