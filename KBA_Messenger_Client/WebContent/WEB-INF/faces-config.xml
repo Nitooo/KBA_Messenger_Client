@@ -125,7 +125,12 @@
 		</navigation-case>
 		<navigation-case>
 	       <from-outcome>cancel</from-outcome>
-	       <to-view-id>/chooseUser.xhtml</to-view-id>
+	       <to-view-id>/addUser.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>addUserError</from-outcome>
+	       <to-view-id>/addUser.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

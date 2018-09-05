@@ -3,6 +3,8 @@ package messenger.Gui;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -74,10 +76,27 @@ public class AddUserBean implements Serializable{
 	}
 	
   	public String addUser() {
-  		userManagement.addUser(username, password);
-  		userBean.init();
-  		return "success";
+  		int status = userManagement.addUser(username, password);
+  		if(status == 0) {
+  			userBean.init();
+  	  		return "success";
+  		}else if (status == 1) {
+  			warn("User existiert bereits!");
+			return "addUser";
+		}else {
+			error("Ein Fehler ist Aufgetreten, bitte kontaktiern Sie den Admin!");
+			return "addUser";
+		}
   	}
+  	
+  	
+  	public void warn(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warnung!", message));
+    }
+  	
+  	public void error(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler!", message));
+    }
 
 
 }
