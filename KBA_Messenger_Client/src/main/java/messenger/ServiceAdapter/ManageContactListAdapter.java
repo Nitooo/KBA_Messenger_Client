@@ -1,6 +1,8 @@
 package messenger.ServiceAdapter;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -17,9 +19,14 @@ public class ManageContactListAdapter {
 		MultiValueMap<String,User> parameters = new LinkedMultiValueMap<String,User>();
 		parameters.add("user", user);
 		parameters.add("contact", contact);
+		System.out.println(user.getUsername());
+		System.out.println(contact.getUsername());
 
-		HttpEntity<MultiValueMap<String,User>> entity = new HttpEntity<MultiValueMap<String, User>>(parameters);		
+		MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+		headers.add("Content-Type", "application/json");
 		
+		HttpEntity<MultiValueMap<String,User>> entity = new HttpEntity<MultiValueMap<String, User>>(parameters, headers);		
+
 	    RestTemplate restTemplate = new RestTemplate();
 	    boolean result = restTemplate.postForObject(uri, entity, boolean.class);
 	    
