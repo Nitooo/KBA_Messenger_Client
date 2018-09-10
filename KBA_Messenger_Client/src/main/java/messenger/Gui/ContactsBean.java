@@ -8,13 +8,14 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import messenger.ServiceAdapter.GetUserAdapter;
 import messenger.ServiceAdapter.ManageContactListAdapter;
 
 @Component
-@Scope("prototype")
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ContactsBean implements Serializable{
 
 	
@@ -29,7 +30,6 @@ public class ContactsBean implements Serializable{
 	
 	private List<Long> contactsIdList = new ArrayList<Long>();
 	
-	private List<GuiContact> contactsList = new ArrayList<GuiContact>();
 	
 	private String contactName;
 	
@@ -71,13 +71,6 @@ public class ContactsBean implements Serializable{
 		this.contactsIdList = contactsIdList;
 	}
 
-	public List<GuiContact> getContactsList() {
-		return contactsList;
-	}
-
-	public void setContactsList(List<GuiContact> contactsList) {
-		this.contactsList = contactsList;
-	}
 	
 	public String getContactName() {
 		return contactName;

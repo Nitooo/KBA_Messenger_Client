@@ -12,17 +12,21 @@
 	<ui:define name="content">
 
 		<h2>
-			<h:outputText value="Chat" />
+			<h:outputText value="Chat: #{chatBean.chat.getName()}" />
 		</h2>
 		
 		<p:button value="Zurück" id="back"
 							 outcome="back" icon="ui-icon-arrowthick-1-w"  />
-		<h:form>
+		<h:form id="formMessages">
 			<p:layout style="min-width:300px;min-height:300px;" >
 
-				<p:layoutUnit position="center" header="Test #{chatListBean.chat}">
-					<ui:repeat value="#{chatBean.messageList}" var="message">
-						   #{message} <br />
+				<p:layoutUnit position="center" header="#{chatBean.chat.getName()}">
+					<ui:repeat value="#{communicationBean.messageList}" var="message">
+					<h:outputText value="#{message.getTimestamp()}" >
+					    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+					</h:outputText>
+				- #{message.getSender().getUsername()} 
+				- #{message.getText()} <br/>
 					</ui:repeat> 
 					<div id="bottomDiv"></div>
 				</p:layoutUnit>
@@ -31,15 +35,31 @@
 				<p:layoutUnit position="south">
 					<h:form id="sendMessage">
 						<p:panelGrid columns="2">
-							<p:inputText id="messageInput" label="Message Input" size="50" value="#{chatBean.message}"/>
+							<p:inputText id="messageInput" required="true" label="Message Input" size="50" value="#{communicationBean.messageText}"/>
 							<p:commandButton value="Senden"
-								action="#{chatBean.sendMessage}"
-								update="@form" 
+								for="messageInput"
+								action="#{communicationBean.sendMessage()}"
+								update="formMessages sendMessage" 
 								oncomplete="scrollToBottom()"/>
 								
 						</p:panelGrid>
 					</h:form>
 				</p:layoutUnit>
+				
+				<p:layoutUnit position="east">
+					<p:panelGrid id = "panel" columns="1" border = "1">
+						<p:button id="show"
+										 value="Informationen anzeigen" 
+										 title="Einstellung anzeigen"
+										 outcome="showInfo"/>
+						<p:commandButton action="#" id="edit"
+										 value="Einstellungen ändern"
+										 title="Einstellung ändern"
+										 outcome="settings"/>
+						<p:commandButton action="#" id="löschen"
+										 value="Chat löschen" title="Chat löschen"/>
+					</p:panelGrid>
+					</p:layoutUnit>
 
 			</p:layout>
 		</h:form>

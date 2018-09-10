@@ -1,7 +1,6 @@
 package messenger.Gui;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -81,6 +80,10 @@ public class UserBean implements Serializable{
     	this.user = user;
     	return "success";
     }
+  	
+  	public void refreshUser() {
+  		this.user = userManagement.getUser(this.user);
+  	}
   	
   	public String deleteUser(User user) {
   		userManagement.deleteUser(user);

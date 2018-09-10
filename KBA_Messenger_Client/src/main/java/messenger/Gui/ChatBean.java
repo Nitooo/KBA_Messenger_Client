@@ -1,21 +1,19 @@
 package messenger.Gui;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import messenger.Domain.Chat;
+import messenger.Domain.User;
 import messenger.ServiceAdapter.CommunicationAdapter;
 import messenger.ServiceAdapter.ManageChatGroupsAdapter;
 
@@ -35,13 +33,29 @@ public class ChatBean implements Serializable{
 	@Autowired
 	private ManageChatGroupsAdapter manageChatGroups;
 	
+	@Autowired
+	private CommunicationAdapter communication;
+	
 	private List<Chat> chatList;
 	
-	private Chat newChat;
+	private Chat chat;
     
     @PostConstruct
     private void init() {
     	chatList = userBean.getUser().getChats();
+    	//CHat zum Testen der Gui
+    	/*Chat newGroupchat = new Chat();
+    	newGroupchat.setAdmin(userBean.getUser());
+    	newGroupchat.setName("TestGuiChat");
+    	newGroupchat.setGroupChat(true);
+    	List<User> users = new ArrayList<User>();
+    	users.add(userBean.getUser());
+    	users.add(userBean.getUser());
+    	newGroupchat.setUsers(users);
+    	chatList.add(newGroupchat);
+    	Chat newSingleChat = new Chat();
+    	newSingleChat.setGroupChat(false);
+    	chatList.add(newSingleChat);*/
     }
     
     public ManageChatGroupsAdapter getManageChatGroups() {
@@ -50,6 +64,14 @@ public class ChatBean implements Serializable{
 
 	public void setManageChatGroups(ManageChatGroupsAdapter manageChatGroups) {
 		this.manageChatGroups = manageChatGroups;
+	}
+
+	public CommunicationAdapter getCommunication() {
+		return communication;
+	}
+
+	public void setCommunication(CommunicationAdapter communication) {
+		this.communication = communication;
 	}
 
 	public UserBean getUserBean() {
@@ -62,11 +84,12 @@ public class ChatBean implements Serializable{
 	}
 
 	public Chat getChat() {
-		return newChat;
+		return chat;
 	}
 
-	public void setChat(Chat chat) {
-		this.newChat = chat;
+	public String setChat(Chat newChat) {
+		this.chat = newChat;
+		return "openChat";
 	}
 
 	public void setChatList(List<Chat> chatList) {
@@ -77,27 +100,52 @@ public class ChatBean implements Serializable{
 		this.userBean = userBean;
 	}
 	
-	public List<Long> getAllConversations(Long userId) {
-		//return manageChatGroups.getAllConversations(userId);
-		return null;
+	
+	/**
+	 * gets a new version for the selected chat from the server
+	 */
+	public void refreshChat() {
+		//this.chat = communication.getChat(this.chat);
 	}
+	
+	
+	/**
+	 * sends updated chat to the server
+	 */
+	public void updateChat() {
+		//manageChatGroups.updateConversation(this.chat);
+		refreshChat();
+	}
+	
+	public String resetChatBean(){
+		userBean.refreshUser();
+    	FacesContext
+		.getCurrentInstance()
+		.getExternalContext()
+		.invalidateSession();
+    	return "chatList?faces-redirect=true";
+    }
+	
+	
+	/**
+	 * sets chat before the chatinfo-page is opened
+	 * @param newChat
+	 * @return
+	 */
+    public String showChatInfo(Chat newChat) {
+    	this.setChat(newChat);
+        return "showInfo";
+    }
+    
+    /**
+     * sets Chat before the ChatEdit-Page is opened
+     * @param newChat
+     * @return
+     */
+    public String editChat(Chat newChat) {
+    	this.setChat(newChat);
+        return "editChat";
+    }
+    
 
-    public String showChat() {
-        return "success";
-    }
-    
-    public String addGroupChat(String chatName) {
-    	chatName = "Testname";
-    	manageChatGroups.addGroupConversation(userBean.getUser(),chatName);
-    	return "successAddGroupChat";
-    }
-    
-    public String addChat(String chatName) {
-    	newChat = new Chat();
-    	newChat.setName(chatName);
-    	newChat.setAdmin(userBean.getUser());
-    	newChat.setGroupChat(false);
-    	//manageChatGroups.addConversation(newChat);
-    	return "successAddChat";
-    }
 }

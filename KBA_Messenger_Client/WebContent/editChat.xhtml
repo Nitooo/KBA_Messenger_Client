@@ -16,6 +16,10 @@
 		
 		<h:form id="form">
 		<p:messages id="errorMessages" style="color:red;margin:8px;" />
+		
+		<p:layout style="min-width:300px;min-height:300px;" >
+		<p:layoutUnit position="center">
+					
 			<p:panelGrid id="borderGrid" columns="1" layout="grid">
 			   	<f:facet name="header">
                     <h:outputText value="Chat anpassen"/>
@@ -28,10 +32,11 @@
 	                    <h:outputText value="Chatname anpassen"/>
 	                </f:facet>
 	                
-					<p:panelGrid id="editChatGrid" columns="3" styleClass="noborderpanelgrid">
-						<p:outputLabel for="chatname" value="Chatname" />
-						<p:inputText maxlength="64" id="chatname" value="" />
-						<p:commandButton id="saveChatName" action="#"
+					<p:panelGrid id="editChatGrid" columns="4" styleClass="noborderpanelgrid">
+						<p:outputLabel for="chatname" value="Chatname:" />
+						<p:outputLabel value="#{chatBean.chat.getName()}" />
+						<p:inputText maxlength="64" id="chatname" value="#{editChatBean.chatname}"/>
+						<p:commandButton id="saveChatName" action="#{editChatBean.changeChatName()}"
 								value="Chatname ändern" icon="ui-icon-disk" update="@form" />
 					</p:panelGrid>
 					
@@ -43,24 +48,27 @@
 					<f:facet name="header">
                     	<h:outputText value="User anpassen"/>
                 	</f:facet>
-                	
-					<p:panelGrid columns="3" styleClass="noborderpanelgrid">
-						<p:outputLabel for="user" value="Chatusers: " />
-						<p:selectOneMenu id="user" value=""
-							style="width:150px">
-							<f:selectItem itemLabel="User im Chat" itemValue=""
-								noSelectionOption="true" />
-							<f:selectItems value="" var="user"
-								itemLabel="" itemValue="" />
-						</p:selectOneMenu>
-						<p:commandButton id="deleteChatUser" action="#"
+                	<p:panelGrid id="borderUserGridInfo" columns="2">
+						<p:dataTable var="user" value="#{chatBean.chat.getUsers()}">
+					    <p:column headerText="User">
+					        <h:outputText value="#{user.username}" />
+					    </p:column>
+					    <p:column headerText="User entfernen">
+					        <p:commandButton id="deleteChatUser" action="#{editChatBean.deleteUserFromChat(user)}"
 								value="User entfernen" icon="ui-icon-disk" update="@form" />
-						
-						
-						<p:outputLabel for="addUser" value="Username" />
-						<p:inputText maxlength="64" id="addUser" value="" />
-						<p:commandButton id="addChatUser" action="#"
-								value="User hinzufügen" icon="ui-icon-disk" update="@form" />
+					    </p:column>
+					    
+					</p:dataTable>
+					
+						<p:panelGrid columns="2" styleClass="noborderpanelgrid">
+							<p:column>
+							<p:inputText maxlength="64" id="addUser" value="#{editChatBean.username}"/>
+						</p:column>
+						<p:column>
+							<p:commandButton action="#{editChatBean.addUserToChat()}"
+									value="User hinzufügen" icon="ui-icon-disk" update="@form" />
+						</p:column>
+						</p:panelGrid>
 					</p:panelGrid>
 					
 					
@@ -70,26 +78,15 @@
 					
 				<p:panelGrid id="borderAdminGrid" columns="1">
 					<f:facet name="header">
-                    	<h:outputText value="Adminrechte anpassen"/>
+                    	<h:outputText value="Adminrechte weitergeben"/>
                 	</f:facet>
 					
-					<p:panelGrid columns="3" styleClass="noborderpanelgrid">
-						<p:outputLabel for="admin" value="User mit Adminrechten: " />
-						<p:selectOneMenu id="admin" value=""
-							style="width:150px">
-							<f:selectItem itemLabel="Admin im Chat" itemValue=""
-								noSelectionOption="true" />
-							<f:selectItems value="" var="admin"
-								itemLabel="" itemValue="" />
-						</p:selectOneMenu>
-						<p:commandButton id="deleteChatAdmin" action="#"
-								value="Adminrechte entfernen" icon="ui-icon-disk" update="@form" />
-								
-								
-						<p:outputLabel for="addAdmin" value="Admin" />
-						<p:inputText maxlength="64" id="addAdmin" value="" />
-						<p:commandButton id="addChatAdmin" action="#"
-								value="Admin hinzufügen" icon="ui-icon-disk" update="@form" />
+					<p:panelGrid columns="4" styleClass="noborderpanelgrid">
+						<p:outputLabel value="Admin:" />
+						<p:outputLabel  value="#{chatBean.chat.getAdmin().getUsername()}" />
+						<p:inputText maxlength="64" id="addAdmin" value="#{editChatBean.admin}" />
+						<p:commandButton id="changeAdmin" for="addAdmin" action="#{editChatBean.changeChatAdmin()}"
+								value="Admin ändern" icon="ui-icon-disk" update="@form" />
 					</p:panelGrid>
 					
 					</p:panelGrid>
@@ -103,6 +100,9 @@
 							value="Zurück" outcome="cancel" immediate="true" icon="ui-icon-close" />
 				</p:panelGrid>
 			</p:panelGrid>
+			</p:layoutUnit>
+			
+			</p:layout>
 		</h:form>
 	</ui:define>
 

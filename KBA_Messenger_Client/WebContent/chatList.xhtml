@@ -14,56 +14,70 @@
 							 
 			<p:button value="Kontakte anzeigen " id="contact" action="#{contactsBean.loadContactList}"
 							 outcome="showContact" icon="ui-icon-circle-plus"  />
+			<p:button value="Aktualisieren " id="refresh" action="#{chatBean.resetChatBean()}" icon="ui-icon-circle-plus"  />
 
 			<p></p>
 			<p:messages id="errorMessages" style="color:red;margin:8px;" />
-			<p:panel header="Waehlen Sie einen Chat #{userBean.user.username}"
-				style="margin-bottom:10px;">
-
+			<p:panel header="Gruppenchats" style="margin-bottom:10px;">
 				<p:dataTable var="chat" value="#{chatBean.chatList}" border="1" cellpadding="10"
 				cellspacing="1">
-					<p:column>
-						<f:facet name="header">Gruppenchat</f:facet>
-	                   
+					
+					<p:columnGroup type="header">
+				        <p:row>
+				            <p:column headerText="Name" width="auto" />
+				            <p:column headerText="Aktion" width="auto" />
+				            <p:column headerText="Admin" width="auto" />
+				        </p:row>
+				    </p:columnGroup>
+	
+					<p:column rendered='#{chat.isGroupChat()==true}'>
+	                   	<h:outputText value="#{chat.getName()}" />
 	                </p:column>
 	
-					<p:column>
-						<f:facet name="header">Aktion</f:facet>
-						<p:commandButton action="#" id="oeffnen"
+					<p:column rendered='#{chat.isGroupChat()==true}'>
+						<p:commandButton action="#{chatBean.setChat(chat)}" id="oeffnen"
 										 icon="	ui-icon-comment" title="Messenger öfnnen" />
-						<h:outputText value="#{chat.name}" />
-						<p:commandButton action="#" id="show"
-										 icon="	ui-icon-search" title="Einstellung anzeigen" />
-						<p:commandButton action="#" id="edit"
+						<p:commandButton action="#{chatBean.showChatInfo(chat)}" id="show"
+										 icon="	ui-icon-search" title="Informationen anzeigen" />
+						<p:commandButton action="#{chatBean.editChat(chat)}" id="edit"
 										 icon="	ui-icon-gear" title="Einstellung ändern" />
 						<h:outputText value=" | " />
 						<p:commandButton action="#" id="löschen"
 										 icon="ui-icon-trash" title="Chat löschen" />
 					</p:column>
+					
+					<p:column rendered='#{chat.isGroupChat()==true}'>
+						<h:outputText value="#{chat.getAdmin().getUsername()}" />
+					</p:column>
+					
 				</p:dataTable>
-				
 				
 				<p:button value="Gruppenchat hinzufügen" id="addGroupChat"
 							 action="" outcome="addGroupChat" icon="ui-icon-circle-plus"  />
+				</p:panel>
 				
-				<p:separator style="height:10px" />
+				<p:panel header="Chats" style="margin-bottom:10px;">
 				
-				<p:dataTable value="#" var="" border="1" cellpadding="10"
+				<p:dataTable var="chat" value="#{chatBean.chatList}" border="1" cellpadding="10"
 				cellspacing="1">
-					<p:column>
-						<f:facet name="header">Chat</f:facet>
-	                    #{contact.contactId}
+					<p:columnGroup type="header">
+				        <p:row>
+				            <p:column headerText="User" width="auto" />
+				            <p:column headerText="Aktion" width="auto" />
+				        </p:row>
+				    </p:columnGroup>
+					<p:column rendered='#{chat.isGroupChat()==false}'>
+	                   	<h:outputText value="#{chat.getName()}" />
 	                </p:column>
 	
-					<p:column>
-						<f:facet name="header">Aktion</f:facet>
-						<p:commandButton action="#" id="oeffnen"
+					<p:column rendered='#{chat.isGroupChat()==false}'>
+						<p:commandButton action="#{chatBean.setChat(chat)}" id="oeffnen"
 										 icon="	ui-icon-comment" title="Messenger öfnnen" />
 						<h:outputText value=" | " />
 						<p:commandButton action="#" id="löschen"
 										 icon="ui-icon-trash" title="Chat löschen" />
 					</p:column>
-				
+					
 				</p:dataTable>
 				
 				

@@ -2,7 +2,6 @@ package messenger.Gui;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 import messenger.ServiceAdapter.UserManagementAdapter;
 
 @Component
-@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class AddUserBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 

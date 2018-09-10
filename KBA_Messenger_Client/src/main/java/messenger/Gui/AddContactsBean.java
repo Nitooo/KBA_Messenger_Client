@@ -1,8 +1,6 @@
 package messenger.Gui;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -11,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import messenger.Domain.User;
 import messenger.ServiceAdapter.GetUserAdapter;
 import messenger.ServiceAdapter.ManageContactListAdapter;
 
@@ -37,8 +36,6 @@ public class AddContactsBean implements Serializable{
 	
 	@PostConstruct
 	private void init(){
-		//contactsIdList = manageContactList.getContactList(userBean.getUserId());
-		//contactsList.add(new GuiContact(30L, "DummyContact"));
 	}
 	
 	
@@ -91,7 +88,11 @@ public class AddContactsBean implements Serializable{
 
 
 	public String addContact() {
-		manageContactList.addContact(userBean.getUser(),getUser.getUser(this.contactName));
+		User contact = getUser.getUser(this.contactName);
+		if(contact!=null) {
+			manageContactList.addContact(userBean.getUser(),contact);
+			return "success";
+		}
 		return "success";
 	}
 

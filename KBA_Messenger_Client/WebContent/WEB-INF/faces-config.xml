@@ -29,6 +29,21 @@
 	       <to-view-id>/addGroupChat.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+	       <from-outcome>openChat</from-outcome>
+	       <to-view-id>/showChatMessages.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>showInfo</from-outcome>
+	       <to-view-id>/showChat.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>editChat</from-outcome>
+	       <to-view-id>/editChat.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 	   <from-view-id>/addChat.xhtml</from-view-id>
@@ -95,6 +110,11 @@
 	   <navigation-case>
 	       <from-outcome>back</from-outcome>
 	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>showInfo</from-outcome>
+	       <to-view-id>/showChat.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
