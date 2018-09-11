@@ -18,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Chat implements Serializable {
@@ -37,9 +39,11 @@ public class Chat implements Serializable {
     	joinColumns = @JoinColumn(name = "CHAT_ID"),
     	inverseJoinColumns = @JoinColumn(name = "USER_ID")
     )
+    @JsonIgnoreProperties(value = "chats", allowSetters = true)
 	private List<User> users = new ArrayList<User>();
     
     @OneToMany(mappedBy = "chat", cascade = CascadeType.REMOVE)
+    //@JsonIgnoreProperties(value = "sender", allowSetters = true)
 	private List<Message> messages = new ArrayList<Message>();
 	
 	@Column(name = "NAME")
@@ -47,6 +51,7 @@ public class Chat implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "ADMIN_ID")
+    @JsonIgnoreProperties(value = "chats", allowSetters = true)
 	private User admin;
 	
 	@Column(name = "ISGROUPCHAT")

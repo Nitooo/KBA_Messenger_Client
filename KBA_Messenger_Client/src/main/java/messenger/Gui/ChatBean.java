@@ -105,7 +105,7 @@ public class ChatBean implements Serializable{
 	 * gets a new version for the selected chat from the server
 	 */
 	public void refreshChat() {
-		//this.chat = communication.getChat(this.chat);
+		this.chat = communication.getChat(this.chat);
 	}
 	
 	

@@ -1,6 +1,10 @@
 package messenger.ServiceAdapter;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import messenger.Domain.Chat;
@@ -11,7 +15,7 @@ public class CommunicationAdapter {
 
 	public boolean sendMessage(Message message) {
 		final String uri = "http://localhost:8081/messenger/communication/sendMessage";
-		
+
 	    RestTemplate restTemplate = new RestTemplate();
 	    boolean result = restTemplate.postForObject(uri, message, boolean.class);
 	    return result;

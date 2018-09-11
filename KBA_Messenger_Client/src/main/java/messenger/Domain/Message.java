@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Message implements Serializable {
 
@@ -30,10 +32,12 @@ public class Message implements Serializable {
 	
     @ManyToOne
     @JoinColumn(name="USER_ID")
+    @JsonIgnoreProperties(value = "chats", allowSetters = true)
     private User sender;
     
 	@ManyToOne
     @JoinColumn(name="CHAT_ID")
+	@JsonIgnoreProperties(value = "messages", allowSetters = true)
     private Chat chat;	
     
     public Long getMessageId() {
@@ -75,6 +79,5 @@ public class Message implements Serializable {
 	public void setChat(Chat chat) {
 		this.chat = chat;
 	}
-
 
 }

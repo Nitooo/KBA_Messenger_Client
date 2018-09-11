@@ -156,11 +156,11 @@ public class CommunicationBean implements Serializable{
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		message.setTimestamp(timestamp);
 		message.setChat(chatBean.getChat());
-		messageList.add(message);
+		//messageList.add(message);
+		communication.sendMessage(message);
+		//chatBean.getChat().setMessages(messageList);
 		
-		chatBean.getChat().setMessages(messageList);
-		
-		//chatBean.refreshChat();
+		chatBean.refreshChat();
 		this.init();
 		
 		//return "success";

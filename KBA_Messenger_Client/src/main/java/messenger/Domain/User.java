@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.JoinColumn;
 
 @Entity(name = "User")
@@ -46,6 +48,7 @@ public class User implements Serializable {
     private Set<User> contactOf = new HashSet<User>();
     
 	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(value = "users", allowSetters = true)
 	private List<Chat> chats = new ArrayList<Chat>();
 	
     public Set<User> getContacts() {
