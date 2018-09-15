@@ -19,7 +19,7 @@ public class UserManagementAdapter implements Serializable {
 
 
 	public int addUser(String username, String passwort) {
-		final String uri = "http://localhost:8081/messenger/userManagement/addUser?username= " + username + "&passwort=" + passwort;
+		final String uri = "http://localhost:8081/messenger/userManagement/addUser?username=" + username + "&passwort=" + passwort;
 	     
 	    RestTemplate restTemplate = new RestTemplate();
 	    int result = restTemplate.getForObject(uri, int.class);

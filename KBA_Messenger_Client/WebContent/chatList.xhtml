@@ -39,11 +39,13 @@
 										 icon="	ui-icon-comment" title="Messenger öfnnen" />
 						<p:commandButton action="#{chatBean.showChatInfo(chat)}" id="show"
 										 icon="	ui-icon-search" title="Informationen anzeigen" />
-						<p:commandButton action="#{chatBean.editChat(chat)}" id="edit"
-										 icon="	ui-icon-gear" title="Einstellung ändern" />
-						<h:outputText value=" | " />
-						<p:commandButton action="#" id="löschen"
-										 icon="ui-icon-trash" title="Chat löschen" />
+						<p:commandButton rendered='#{chat.getAdmin().getUsername()==userBean.getUser().getUsername()}' 
+											action="#{chatBean.editChat(chat)}" id="edit"
+										 	icon="	ui-icon-gear" title="Einstellung ändern" />
+						<h:outputText rendered='#{chat.getAdmin().getUsername()==userBean.getUser().getUsername()}' value=" | " />
+						<p:commandButton rendered='#{chat.getAdmin().getUsername()==userBean.getUser().getUsername()}' 
+											action="#" id="löschen"
+										 	icon="ui-icon-trash" title="Chat löschen" />
 					</p:column>
 					
 					<p:column rendered='#{chat.isGroupChat()==true}'>

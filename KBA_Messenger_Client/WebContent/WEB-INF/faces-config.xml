@@ -36,7 +36,7 @@
 		</navigation-case>
 		<navigation-case>
 	       <from-outcome>showInfo</from-outcome>
-	       <to-view-id>/showChat.xhtml</to-view-id>
+	       <to-view-id>/showChatInformation.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
@@ -74,8 +74,13 @@
 	<navigation-rule>
 	   <from-view-id>/editChat.xhtml</from-view-id>
 	   <navigation-case>
-	       <from-outcome>cancel</from-outcome>
+	       <from-outcome>openChatList</from-outcome>
 	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>openChat</from-outcome>
+	       <to-view-id>/showChatMessages.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -114,7 +119,12 @@
 		</navigation-case>
 		<navigation-case>
 	       <from-outcome>showInfo</from-outcome>
-	       <to-view-id>/showChat.xhtml</to-view-id>
+	       <to-view-id>/showChatInformation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>settings</from-outcome>
+	       <to-view-id>/editChat.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -155,10 +165,15 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-	<from-view-id>/showChat.xhtml</from-view-id>
-	   <navigation-case>
-	       <from-outcome>cancel</from-outcome>
+	<from-view-id>/showChatInformation.xhtml</from-view-id>
+	     <navigation-case>
+	       <from-outcome>openChatList</from-outcome>
 	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>openChat</from-outcome>
+	       <to-view-id>/showChatMessages.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

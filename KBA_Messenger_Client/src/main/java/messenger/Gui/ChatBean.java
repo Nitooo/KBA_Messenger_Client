@@ -89,6 +89,7 @@ public class ChatBean implements Serializable{
 
 	public String setChat(Chat newChat) {
 		this.chat = newChat;
+		refreshChat();
 		return "openChat";
 	}
 
@@ -113,7 +114,7 @@ public class ChatBean implements Serializable{
 	 * sends updated chat to the server
 	 */
 	public void updateChat() {
-		//manageChatGroups.updateConversation(this.chat);
+		manageChatGroups.updateConversation(this.chat);
 		refreshChat();
 	}
 	

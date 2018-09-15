@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -42,10 +44,10 @@ public class editChatBean implements Serializable{
 	
 	private String admin;
 	
-	private String username;
+	private String usernameInput;
 	
 	private String chatname;
-    
+	
     @PostConstruct
     private void init() {  
     	
@@ -99,12 +101,13 @@ public class editChatBean implements Serializable{
 		this.admin = admin;
 	}
 
-	public String getUsername() {
-		return username;
+
+	public String getUsernameInput() {
+		return usernameInput;
 	}
 
-	public void setUsername(String user) {
-		this.username = user;
+	public void setUsernameInput(String usernameInput) {
+		this.usernameInput = usernameInput;
 	}
 
 	public String getChatname() {
@@ -124,13 +127,15 @@ public class editChatBean implements Serializable{
 	}
 	
 	public void addUserToChat() {
-		User user = getUser.getUser(this.username);
+		User user = getUser.getUser(this.usernameInput);
+		
 		if(user!=null) {
-			chatBean.getChat().setAdmin(user);
 			List<User> userList = chatBean.getChat().getUsers();
 			userList.add(user);
 			chatBean.getChat().setUsers(userList);
 			chatBean.updateChat();
+		} else {
+			warn("User " + this.usernameInput + " wurde nicht gefunden!");
 		}
 	}
 	
@@ -147,6 +152,14 @@ public class editChatBean implements Serializable{
 		}
 		
 	}
+	
+	public void warn(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warnung!", message));
+    }
+  	
+  	public void error(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler!", message));
+    }
 	
 	
     

@@ -15,7 +15,15 @@
 		</h2>
 		
 		<h:form id="form">
-		<p:messages id="errorMessages" style="color:red;margin:8px;" />
+		<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+		
+		<p:button value="Chat öffnen" id="openChat"
+							 outcome="openChat" icon="ui-icon-arrowthick-1-w"  />
+							 
+		<p:button value="Chatliste öffnen" id="openChatList"
+							 outcome="openChatList" icon="ui-icon-arrowthick-1-w"  />
 		
 		<p:layout style="min-width:300px;min-height:300px;" >
 		<p:layoutUnit position="center">
@@ -62,7 +70,7 @@
 					
 						<p:panelGrid columns="2" styleClass="noborderpanelgrid">
 							<p:column>
-							<p:inputText maxlength="64" id="addUser" value="#{editChatBean.username}"/>
+							<p:inputText maxlength="64" id="addUser" value="#{editChatBean.usernameInput}"/>
 						</p:column>
 						<p:column>
 							<p:commandButton action="#{editChatBean.addUserToChat()}"
@@ -94,10 +102,6 @@
 					<p:spacer height="10" />
 					
 					<p:panelGrid colums="2">
-							
-			
-						<p:button id="cancel" 
-							value="Zurück" outcome="cancel" immediate="true" icon="ui-icon-close" />
 				</p:panelGrid>
 			</p:panelGrid>
 			</p:layoutUnit>
