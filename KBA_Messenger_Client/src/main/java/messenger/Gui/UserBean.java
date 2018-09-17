@@ -82,7 +82,14 @@ public class UserBean implements Serializable{
     }
   	
   	public void refreshUser() {
-  		this.user = userManagement.getUser(this.user);
+  		//this.user = userManagement.getUser(this.user);
+  		this.user = userManagement.getUserById(this.user.getUserId());
+  		/*this.init();
+  		for(User u : this.userList) {
+  			if(u.getUserId()==this.user.getUserId()) {
+  				this.user = u;
+  			}
+  		}*/
   	}
   	
   	public String deleteUser(User user) {

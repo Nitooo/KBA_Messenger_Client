@@ -23,14 +23,13 @@
 		
 		<p:button value="Chatliste öffnen" id="back"
 							 outcome="back" icon="ui-icon-arrowthick-1-w"  />
-		<h:form id="formMessages">
 			<p:layout style="min-width:300px;min-height:300px;" >
 
 				<p:layoutUnit position="center" header="#{chatBean.chat.getName()}">
 				<h:form id="messages">
 					<ui:repeat value="#{communicationBean.messageList}" var="message">
 					<h:outputText value="#{message.getTimestamp()}" >
-					    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+					    <f:convertDateTime timeZone="GMT+2" pattern="dd.MM.yyyy HH:mm" />
 					</h:outputText>
 				- #{message.getSender().getUsername()} 
 				- #{message.getText()} <br/>
@@ -43,13 +42,9 @@
 
 				<p:layoutUnit position="south">
 					<h:form id="sendMessage">
-						<p:panelGrid columns="3">
+						<p:panelGrid columns="2">
 							<p:inputText id="messageInput" required="true" label="Message Input" size="50" value="#{communicationBean.messageText}"/>
-							<p:commandButton value="Senden"
-								for="messageInput"
-								action="#{communicationBean.sendMessage()}"
-								update="formMessages sendMessage" 
-								oncomplete="scrollToBottom()"/>
+							<p:commandButton id="sendMessage" value="Senden" for="messageInput" action="#{communicationBean.sendMessage()}" update="sendMessage messages" oncomplete="scrollToBottom()"/>
 						</p:panelGrid>
 					</h:form>
 					<p:commandButton value="Aktualisieren " id="refresh" action="#{chatBean.refreshChat()}" update="messages" icon="ui-icon-circle-plus" oncomplete="scrollToBottom()"  />
@@ -66,14 +61,10 @@
 										 	value="Einstellungen ändern"
 										 	title="Einstellung ändern"
 										 	outcome="settings"/>
-						<p:commandButton rendered='#{chatBean.getChat().getAdmin().getUsername()==userBean.getUser().getUsername()}'
-											action="#" id="löschen"
-										 	value="Chat löschen" title="Chat löschen"/>
 					</p:panelGrid>
 					</p:layoutUnit>
 
 			</p:layout>
-		</h:form>
 		
 		
 		<script type="text/javascript">             

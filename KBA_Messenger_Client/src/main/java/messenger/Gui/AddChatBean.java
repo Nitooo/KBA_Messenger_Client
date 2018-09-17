@@ -31,6 +31,9 @@ public class AddChatBean implements Serializable{
 
 	@Autowired
 	private UserBean userBean;
+	
+	@Autowired
+	private ChatBean chatBean;
 
 	@Autowired
 	private ManageChatGroupsAdapter manageChatGroups;
@@ -59,11 +62,13 @@ public class AddChatBean implements Serializable{
     
     public String addGroupConversation() {
     	manageChatGroups.addGroupConversation(userBean.getUser(),this.chatname);
+    	chatBean.resetChatBean();
     	return "successAddGroupChat";
     }
     
     public String addConversation() {
     	manageChatGroups.addConversation(userBean.getUser());
+    	chatBean.resetChatBean();
     	return "successAddChat";
     }
 }

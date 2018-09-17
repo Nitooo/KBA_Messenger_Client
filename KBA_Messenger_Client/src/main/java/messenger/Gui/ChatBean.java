@@ -105,11 +105,8 @@ public class ChatBean implements Serializable{
 	
 	public String resetChatBean(){
 		userBean.refreshUser();
-    	FacesContext
-		.getCurrentInstance()
-		.getExternalContext()
-		.invalidateSession();
-    	return "chatList?faces-redirect=true";
+		this.init();
+    	return "reset";
     }
 	
 	
@@ -145,6 +142,7 @@ public class ChatBean implements Serializable{
     
     public String deleteConversation(Chat newchat) {
 		manageChatGroups.deleteConveration(newchat);
+		this.resetChatBean();
     	return "conversationDeleted";
     }
 
