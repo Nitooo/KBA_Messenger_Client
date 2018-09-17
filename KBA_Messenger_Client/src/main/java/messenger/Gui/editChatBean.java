@@ -126,7 +126,21 @@ public class editChatBean implements Serializable{
 		
 	}
 	
-	public void addUserToChat() {
+	public void addUserToConversation() {
+		User user = getUser.getUser(this.usernameInput);
+		
+		if(user!=null) {
+			List<User> userList = chatBean.getChat().getUsers();
+			userList.add(user);
+			chatBean.getChat().setUsers(userList);
+			chatBean.getChat().setName(userBean.getUser().getUsername() + " - " + user.getUsername());
+			chatBean.updateChat();
+		} else {
+			warn("User " + this.usernameInput + " wurde nicht gefunden!");
+		}
+	}
+	
+	public void addUserToGroupConversation() {
 		User user = getUser.getUser(this.usernameInput);
 		
 		if(user!=null) {

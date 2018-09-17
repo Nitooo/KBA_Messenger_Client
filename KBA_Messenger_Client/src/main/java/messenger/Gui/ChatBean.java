@@ -1,7 +1,6 @@
 package messenger.Gui;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import messenger.Domain.Chat;
-import messenger.Domain.User;
 import messenger.ServiceAdapter.CommunicationAdapter;
 import messenger.ServiceAdapter.ManageChatGroupsAdapter;
 
@@ -43,19 +41,6 @@ public class ChatBean implements Serializable{
     @PostConstruct
     private void init() {
     	chatList = userBean.getUser().getChats();
-    	//CHat zum Testen der Gui
-    	/*Chat newGroupchat = new Chat();
-    	newGroupchat.setAdmin(userBean.getUser());
-    	newGroupchat.setName("TestGuiChat");
-    	newGroupchat.setGroupChat(true);
-    	List<User> users = new ArrayList<User>();
-    	users.add(userBean.getUser());
-    	users.add(userBean.getUser());
-    	newGroupchat.setUsers(users);
-    	chatList.add(newGroupchat);
-    	Chat newSingleChat = new Chat();
-    	newSingleChat.setGroupChat(false);
-    	chatList.add(newSingleChat);*/
     }
     
     public ManageChatGroupsAdapter getManageChatGroups() {
@@ -143,10 +128,24 @@ public class ChatBean implements Serializable{
      * @param newChat
      * @return
      */
-    public String editChat(Chat newChat) {
+    public String editGroupConversation(Chat newChat) {
     	this.setChat(newChat);
-        return "editChat";
+    	return "editGroupConversation";
     }
     
+    /**
+     * sets Chat before the ChatEdit-Page is opened
+     * @param newChat
+     * @return
+     */
+    public String editConversation(Chat newChat) {
+    	this.setChat(newChat);
+    	return "editConversation";
+    }
+    
+    public String deleteConversation(Chat newchat) {
+		manageChatGroups.deleteConveration(newchat);
+    	return "conversationDeleted";
+    }
 
 }

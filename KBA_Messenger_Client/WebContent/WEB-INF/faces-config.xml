@@ -40,8 +40,13 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
-	       <from-outcome>editChat</from-outcome>
-	       <to-view-id>/editChat.xhtml</to-view-id>
+	       <from-outcome>editGroupConversation</from-outcome>
+	       <to-view-id>/editGroupConversation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>editConversation</from-outcome>
+	       <to-view-id>/editConversation.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -72,7 +77,20 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-	   <from-view-id>/editChat.xhtml</from-view-id>
+	   <from-view-id>/editGroupConversation.xhtml</from-view-id>
+	   <navigation-case>
+	       <from-outcome>openChatList</from-outcome>
+	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>openChat</from-outcome>
+	       <to-view-id>/showChatMessages.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+	   <from-view-id>/editConversation.xhtml</from-view-id>
 	   <navigation-case>
 	       <from-outcome>openChatList</from-outcome>
 	       <to-view-id>/chatList.xhtml</to-view-id>
@@ -124,7 +142,7 @@
 		</navigation-case>
 		<navigation-case>
 	       <from-outcome>settings</from-outcome>
-	       <to-view-id>/editChat.xhtml</to-view-id>
+	       <to-view-id>/editGroupConversation</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

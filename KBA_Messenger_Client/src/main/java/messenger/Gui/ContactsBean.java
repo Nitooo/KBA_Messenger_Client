@@ -85,6 +85,7 @@ public class ContactsBean implements Serializable{
 		contactName = "";
 		this.init();
 		return "success";
+		
 	}
 
 }

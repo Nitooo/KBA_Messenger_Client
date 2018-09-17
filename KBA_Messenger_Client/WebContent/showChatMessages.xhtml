@@ -14,6 +14,12 @@
 		<h2>
 			<h:outputText value="Chat: #{chatBean.chat.getName()}" />
 		</h2>
+		<h3>
+		User:  
+		<ui:repeat value="#{chatBean.chat.getUsers()}" var="user">
+				#{user.getUsername()},
+		</ui:repeat>
+		</h3>
 		
 		<p:button value="Chatliste öffnen" id="back"
 							 outcome="back" icon="ui-icon-arrowthick-1-w"  />
@@ -21,6 +27,7 @@
 			<p:layout style="min-width:300px;min-height:300px;" >
 
 				<p:layoutUnit position="center" header="#{chatBean.chat.getName()}">
+				<h:form id="messages">
 					<ui:repeat value="#{communicationBean.messageList}" var="message">
 					<h:outputText value="#{message.getTimestamp()}" >
 					    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
@@ -29,6 +36,8 @@
 				- #{message.getText()} <br/>
 					</ui:repeat> 
 					<div id="bottomDiv"></div>
+				</h:form>
+					
 				</p:layoutUnit>
 
 
@@ -43,11 +52,11 @@
 								oncomplete="scrollToBottom()"/>
 						</p:panelGrid>
 					</h:form>
-					<p:commandButton value="Aktualisieren " id="refresh" action="#{chatBean.refreshChat()}" update="formMessages" icon="ui-icon-circle-plus" oncomplete="scrollToBottom()"  />
+					<p:commandButton value="Aktualisieren " id="refresh" action="#{chatBean.refreshChat()}" update="messages" icon="ui-icon-circle-plus" oncomplete="scrollToBottom()"  />
 				</p:layoutUnit>
 				
 				<p:layoutUnit position="east">
-					<p:panelGrid id = "panel" columns="1" border = "1">
+					<p:panelGrid id = "panel" columns="1" border = "1" rendered="#{chatBean.getChat().isGroupChat()==true}">
 						<p:button id="show"
 										 value="Informationen anzeigen" 
 										 title="Einstellung anzeigen"
