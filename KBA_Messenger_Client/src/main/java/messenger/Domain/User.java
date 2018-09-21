@@ -38,6 +38,7 @@ public class User implements Serializable {
     private String password;
     
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(value={ "contacts", "contactOf" }, allowSetters = true)
     @JoinTable(name = "CONTACTS",
     	joinColumns = @JoinColumn(name = "USER_ID"),
     	inverseJoinColumns = @JoinColumn(name = "CONTACT_ID")
@@ -45,6 +46,7 @@ public class User implements Serializable {
     private Set<User> contacts = new HashSet<User>();
     
 	@ManyToMany(mappedBy = "contacts", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(value={ "contacts", "contactOf" }, allowSetters = true)
     private Set<User> contactOf = new HashSet<User>();
     
 	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
