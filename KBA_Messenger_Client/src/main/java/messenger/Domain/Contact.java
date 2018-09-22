@@ -15,14 +15,16 @@ public class Contact implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue
-    @Id
-    @Column(name = "ID")
-    private Long clientContactId;
+//	@GeneratedValue
+//    @Id
+//    @Column(name = "ID")
+//    private Long clientContactId;
 	
+	@Id
     @Column(name = "USER_ID")
     private Long userId;
     
+	@Id
     @Column(name = "CONTACT_ID")
     private Long contactId;
 
