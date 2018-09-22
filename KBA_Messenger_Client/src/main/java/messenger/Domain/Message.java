@@ -32,7 +32,7 @@ public class Message implements Serializable {
 	
     @ManyToOne
     @JoinColumn(name="USER_ID")
-    @JsonIgnoreProperties(value = "chats", allowSetters = true)
+    @JsonIgnoreProperties(value={ "contacts", "contactOf", "chats" }, allowSetters = true)
     private User sender;
     
 	@ManyToOne

@@ -30,6 +30,9 @@ public class AddContactsBean implements Serializable{
 	private GetUserAdapter getUser;
 	
 	@Autowired
+	private ContactsBean contactBean;
+	
+	@Autowired
 	private ManageContactListAdapter manageContactList;
 	
 	private String contactName;
@@ -91,6 +94,8 @@ public class AddContactsBean implements Serializable{
 		User contact = getUser.getUser(this.contactName);
 		if(contact!=null) {
 			manageContactList.addContact(userBean.getUser(),contact);
+			userBean.refreshUser();
+			contactBean.init();
 			return "success";
 		}
 		return "success";

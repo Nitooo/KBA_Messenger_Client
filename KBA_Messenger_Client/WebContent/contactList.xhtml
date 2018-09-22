@@ -20,16 +20,17 @@
 
 			<p></p>
 
-			<p:dataTable value="#" var="contact" border="1" cellpadding="10"
+			<p:dataTable var="contact" value="#{contactsBean.contactList}" border="1" cellpadding="10"
 				cellspacing="1">
 				<p:column>
 					<f:facet name="header">Kontaktname</f:facet>
+					<h:outputText value="#{contact.getUsername()}" />
                 </p:column>
 
 				<p:column>
 					<f:facet name="header">Aktion</f:facet>
-					<p:commandButton action="#{contactsBean.deleteContact(p)}" id="löschen"
-									 icon="ui-icon-folder-open" title="oeffnen" />
+					<p:commandButton action="#{contactsBean.deleteContact(contact)}" id="löschen"
+									 icon="ui-icon-folder-open" title="oeffnen" update="form" />
 				</p:column>
 			</p:dataTable>
 		</h:form>

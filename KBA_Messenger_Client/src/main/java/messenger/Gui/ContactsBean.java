@@ -3,6 +3,7 @@ package messenger.Gui;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import messenger.Domain.User;
 import messenger.ServiceAdapter.GetUserAdapter;
 import messenger.ServiceAdapter.ManageContactListAdapter;
 
@@ -28,15 +30,16 @@ public class ContactsBean implements Serializable{
 	@Autowired
 	private ManageContactListAdapter manageContactList;
 	
-	private List<Long> contactsIdList = new ArrayList<Long>();
+	private Set<User> contactList;
 	
 	
 	private String contactName;
 	
 	@PostConstruct
-	private void init(){
+	public void init(){
 		//contactsIdList = manageContactList.getContactList(userBean.getUserId());
 		//contactsList.add(new GuiContact(30L, "DummyContact"));
+		this.setContactList(userBean.getUser().getContacts());
 	}
 
 	public UserBean getUserBean() {
@@ -63,15 +66,15 @@ public class ContactsBean implements Serializable{
 		this.manageContactList = manageContactList;
 	}
 
-	public List<Long> getContactsIdList() {
-		return contactsIdList;
-	}
-
-	public void setContactsIdList(List<Long> contactsIdList) {
-		this.contactsIdList = contactsIdList;
-	}
-
 	
+	public Set<User> getContactList() {
+		return contactList;
+	}
+
+	public void setContactList(Set<User> contactList) {
+		this.contactList = contactList;
+	}
+
 	public String getContactName() {
 		return contactName;
 	}
@@ -86,6 +89,13 @@ public class ContactsBean implements Serializable{
 		this.init();
 		return "success";
 		
+	}
+	
+	public String deleteContact(User contact) {
+		manageContactList.deleteContact(userBean.getUser(), contact);
+		userBean.refreshUser();
+		this.init();
+    	return "reset";
 	}
 
 }

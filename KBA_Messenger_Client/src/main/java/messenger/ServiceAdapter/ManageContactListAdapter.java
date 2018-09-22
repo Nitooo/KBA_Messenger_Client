@@ -19,8 +19,6 @@ public class ManageContactListAdapter {
 		LinkedMultiValueMap<String,User> parameters = new LinkedMultiValueMap<String,User>();
 		parameters.add("user", user);
 		parameters.add("contact", contact);
-		System.out.println(user.getUsername());
-		System.out.println(contact.getUsername());
 
 		LinkedMultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
 		headers.add("Content-Type", "application/json");
@@ -40,7 +38,10 @@ public class ManageContactListAdapter {
 		parameters.add("user", user);
 		parameters.add("contact", contact);
 
-		HttpEntity<MultiValueMap<String,User>> entity = new HttpEntity<MultiValueMap<String, User>>(parameters);		
+		LinkedMultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+		headers.add("Content-Type", "application/json");
+		
+		HttpEntity<MultiValueMap<String,User>> entity = new HttpEntity<MultiValueMap<String, User>>(parameters, headers);		
 		
 	    RestTemplate restTemplate = new RestTemplate();
 	    boolean result = restTemplate.postForObject(uri, entity, boolean.class);
