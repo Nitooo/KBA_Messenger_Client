@@ -30,4 +30,6 @@ public interface ManageContactList {
 	 */
 	
 	public Set<User> getContactList(User user);
+	
+	public void deleteUserFromContacs(User contact);
 }

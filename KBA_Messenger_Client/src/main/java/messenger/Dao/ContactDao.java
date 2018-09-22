@@ -54,4 +54,6 @@ public interface ContactDao {
 	
 	public List<Contact> getContactList(User user);
 	
+	public void deleteUserFromContacs(User contact);
+	
 }

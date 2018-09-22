@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,7 +50,7 @@ public class User implements Serializable {
     @JsonIgnoreProperties(value={ "contacts", "contactOf", "chats" }, allowSetters = true)
     private Set<User> contactOf = new HashSet<User>();
     
-	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties(value = "users", allowSetters = true)
 	private List<Chat> chats = new ArrayList<Chat>();
 	

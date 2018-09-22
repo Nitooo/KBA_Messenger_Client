@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Service;
@@ -58,5 +59,11 @@ public class ContactDaoImpl implements ContactDao, Serializable {
 		query.setParameter("userId", user.getUserId());
 		List<Contact> contactIdList = query.getResultList();
 		return contactIdList;
+	}
+	
+	public void deleteUserFromContacs(User contact) {
+		Query query = em.createQuery("DELETE FROM ClientContact WHERE CONTACT_ID = :contactId");
+		query.setParameter("contactId", contact.getUserId());
+		query.executeUpdate();
 	}
 }

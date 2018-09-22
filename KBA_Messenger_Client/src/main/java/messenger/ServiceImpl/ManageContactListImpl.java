@@ -86,4 +86,9 @@ public class ManageContactListImpl implements ManageContactList, Serializable {
 		return contactList;
 	}
 
+	@Override
+	@Transactional
+	public void deleteUserFromContacs(User contact) {
+		contactDbService.deleteUserFromContacs(contact);
+	}
 }

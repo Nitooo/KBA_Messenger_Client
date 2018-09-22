@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import messenger.Domain.User;
+import messenger.Service.ManageContactList;
 import messenger.ServiceAdapter.GetUserAdapter;
 import messenger.ServiceAdapter.UserManagementAdapter;
 
@@ -31,6 +32,9 @@ public class UserBean implements Serializable{
     
 	@Autowired
     private GetUserAdapter getUser;
+	
+	@Autowired
+	private ManageContactList manageContactList;
     
     private List<User> userList;
     
@@ -93,6 +97,7 @@ public class UserBean implements Serializable{
   	}
   	
   	public String deleteUser(User user) {
+  		manageContactList.deleteUserFromContacs(user);
   		userManagement.deleteUser(user);
     	this.logout();
     	this.init();
