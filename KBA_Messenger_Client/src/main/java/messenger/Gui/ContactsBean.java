@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import messenger.Domain.User;
+import messenger.Service.ManageContactList;
 import messenger.ServiceAdapter.GetUserAdapter;
 import messenger.ServiceAdapter.ManageContactListAdapter;
 
@@ -28,7 +29,7 @@ public class ContactsBean implements Serializable{
 	private GetUserAdapter getUser;
 	
 	@Autowired
-	private ManageContactListAdapter manageContactList;
+	private ManageContactList manageContactList;
 	
 	private Set<User> contactList;
 	
@@ -39,7 +40,8 @@ public class ContactsBean implements Serializable{
 	public void init(){
 		//contactsIdList = manageContactList.getContactList(userBean.getUserId());
 		//contactsList.add(new GuiContact(30L, "DummyContact"));
-		this.setContactList(userBean.getUser().getContacts());
+		//this.setContactList(userBean.getUser().getContacts());
+		this.setContactList(manageContactList.getContactList(userBean.getUser()));
 	}
 
 	public UserBean getUserBean() {
@@ -58,11 +60,11 @@ public class ContactsBean implements Serializable{
 		this.getUser = getUser;
 	}
 
-	public ManageContactListAdapter getManageContactList() {
+	public ManageContactList getManageContactList() {
 		return manageContactList;
 	}
 
-	public void setManageContactList(ManageContactListAdapter manageContactList) {
+	public void setManageContactList(ManageContactList manageContactList) {
 		this.manageContactList = manageContactList;
 	}
 
