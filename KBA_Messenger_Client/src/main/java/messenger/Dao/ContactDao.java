@@ -48,12 +48,25 @@ public interface ContactDao {
 	public <T> void removeObject(T entity);
 
 	/**
-
+	 * returns the Contact between two users
+	 * @param user owner of the contact
+	 *        contact contact of the owner
+	 * @return Contact object of two users
 	 */
+	
 	public Contact getContact(User user, User contact);
 	
+	/**
+	 * returns a list with all the contact of a user
+	 * @param user owner of contact list
+	 * @return List of contacts belonging to the contacts of the user
+	 */
 	public List<Contact> getContactList(User user);
 	
+	/**
+	 * deletes all Contact objects where the user is involved
+	 * @param user in the contact list
+	 */
 	public void deleteUserFromContacs(User contact);
 	
 }

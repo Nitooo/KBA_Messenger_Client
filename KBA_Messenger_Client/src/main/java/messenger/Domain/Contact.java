@@ -14,11 +14,6 @@ public class Contact implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-//	@GeneratedValue
-//    @Id
-//    @Column(name = "ID")
-//    private Long clientContactId;
 	
 	@Id
     @Column(name = "USER_ID")

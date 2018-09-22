@@ -62,7 +62,7 @@ public class ContactDaoImpl implements ContactDao, Serializable {
 	}
 	
 	public void deleteUserFromContacs(User contact) {
-		Query query = em.createQuery("DELETE FROM ClientContact WHERE CONTACT_ID = :contactId");
+		Query query = em.createQuery("DELETE FROM ClientContact WHERE CONTACT_ID = :contactId OR USER_ID = :contactId");
 		query.setParameter("contactId", contact.getUserId());
 		query.executeUpdate();
 	}

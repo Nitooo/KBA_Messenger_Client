@@ -31,5 +31,10 @@ public interface ManageContactList {
 	
 	public Set<User> getContactList(User user);
 	
+	
+	/**
+	 * deletes all Contact objects where the user is involved
+	 * @param user in the contact list
+	 */
 	public void deleteUserFromContacs(User contact);
 }
