@@ -17,24 +17,33 @@
 		<h3>
 		User:  
 		<ui:repeat value="#{chatBean.chat.getUsers()}" var="user">
-				#{user.getUsername()},
+				#{user.getUsername()} 
 		</ui:repeat>
 		</h3>
 		
 		<p:button value="Chatliste öffnen" id="back"
 							 outcome="back" icon="ui-icon-arrowthick-1-w"  />
-			<p:layout style="min-width:300px;min-height:300px;" >
-
+			<p:layout style="min-height:500px;">
+			
 				<p:layoutUnit position="center" header="#{chatBean.chat.getName()}">
+				
 				<h:form id="messages">
-					<ui:repeat value="#{communicationBean.messageList}" var="message">
-					<h:outputText value="#{message.getTimestamp()}" >
+				
+				
+				<p:dataTable var="message" value="#{communicationBean.messageList}" sortBy="#{message.messageId}">
+			    <p:column style="width:100px;">
+			        <h:outputText value="#{message.getTimestamp()}" >
 					    <f:convertDateTime timeZone="GMT+2" pattern="dd.MM.yyyy HH:mm" />
 					</h:outputText>
-				- #{message.getSender().getUsername()} 
-				- #{message.getText()} <br/>
-					</ui:repeat> 
-					<div id="bottomDiv"></div>
+			    </p:column>
+			    <p:column style="width:100px;">
+			        <h:outputText value="#{message.getSender().getUsername()}" />
+			    </p:column>
+			    <p:column>
+			        <h:outputText value="#{message.getText()}" />
+			    </p:column>
+			</p:dataTable>
+			<div id="bottomDiv"></div>
 				</h:form>
 					
 				</p:layoutUnit>
@@ -43,11 +52,11 @@
 				<p:layoutUnit position="south">
 					<h:form id="sendMessage">
 						<p:panelGrid columns="2">
-							<p:inputText id="messageInput" required="true" label="Message Input" size="50" value="#{communicationBean.messageText}"/>
+							<p:inputText id="messageInput" required="true" label="Message Input" autoResize="true" value="#{communicationBean.messageText}"/>
 							<p:commandButton id="sendMessage" value="Senden" for="messageInput" action="#{communicationBean.sendMessage()}" update="sendMessage messages" oncomplete="scrollToBottom()"/>
 						</p:panelGrid>
 					</h:form>
-					<p:commandButton value="Aktualisieren " id="refresh" action="#{chatBean.refreshChat()}" update="messages" icon="ui-icon-circle-plus" oncomplete="scrollToBottom()"  />
+					<p:commandButton value="Aktualisieren " id="refresh" action="#{chatBean.refreshChat()}" update="messages" icon="ui-icon-arrowrefresh-1-s" oncomplete="scrollToBottom()"  />
 				</p:layoutUnit>
 				
 				<p:layoutUnit position="east">

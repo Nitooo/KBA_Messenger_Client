@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class UserBean implements Serializable{
 	
 	@Autowired
 	private ManageContactList manageContactList;
+	
+	private ErrorMessagesGui errorMessages = new ErrorMessagesGui();
     
     private List<User> userList;
     
@@ -42,7 +45,12 @@ public class UserBean implements Serializable{
 
 	@PostConstruct
     public void init() {
-    	userList = Arrays.asList(userManagement.getAllUsers());
+		try {
+			userList = Arrays.asList(userManagement.getAllUsers());
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+		}
+    	
     }
 
     public UserManagementAdapter getUserManagement() {
@@ -86,14 +94,7 @@ public class UserBean implements Serializable{
     }
   	
   	public void refreshUser() {
-  		//this.user = userManagement.getUser(this.user);
   		this.user = userManagement.getUserById(this.user.getUserId());
-  		/*this.init();
-  		for(User u : this.userList) {
-  			if(u.getUserId()==this.user.getUserId()) {
-  				this.user = u;
-  			}
-  		}*/
   	}
   	
   	public String deleteUser(User user) {
@@ -101,7 +102,7 @@ public class UserBean implements Serializable{
   		userManagement.deleteUser(user);
     	this.logout();
     	this.init();
-    	return "successDelete";
+    	return "successDeleteUser";
   	}
   	
   	public String logout(){

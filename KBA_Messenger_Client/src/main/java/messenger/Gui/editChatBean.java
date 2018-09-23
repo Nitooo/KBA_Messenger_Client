@@ -42,6 +42,8 @@ public class editChatBean implements Serializable{
 	@Autowired
 	private GetUserAdapter getUser;
 	
+	ErrorMessagesGui errorMessages = new ErrorMessagesGui();
+	
 	private String admin;
 	
 	private String usernameInput;
@@ -126,7 +128,7 @@ public class editChatBean implements Serializable{
 		
 	}
 	
-	public void addUserToConversation() {
+	public String addUserToConversation() {
 		User user = getUser.getUser(this.usernameInput);
 		
 		if(user!=null) {
@@ -135,9 +137,22 @@ public class editChatBean implements Serializable{
 			chatBean.getChat().setUsers(userList);
 			chatBean.getChat().setName(userBean.getUser().getUsername() + " - " + user.getUsername());
 			chatBean.updateChat();
+			chatBean.resetChatBean();
+			return "userAdded";
 		} else {
-			warn("User " + this.usernameInput + " wurde nicht gefunden!");
+			errorMessages.warn("User " + this.usernameInput + " wurde nicht gefunden!");
+			return "userAddedError";
 		}
+	}
+	
+	
+	public boolean checkIfUserIsInChat(User user, List<User> userList) {
+		for (User u : userList) {
+	        if (u.getUsername().equals(user.getUsername())) {
+	            return true;
+	        }
+	    }
+		return false;
 	}
 	
 	public void addUserToGroupConversation() {
@@ -145,12 +160,17 @@ public class editChatBean implements Serializable{
 		
 		if(user!=null) {
 			List<User> userList = chatBean.getChat().getUsers();
-			userList.add(user);
-			chatBean.getChat().setUsers(userList);
-			chatBean.updateChat();
+			if (!checkIfUserIsInChat(user, userList)) {
+				userList.add(user);
+				chatBean.getChat().setUsers(userList);
+				chatBean.updateChat();
+			} else {
+				errorMessages.warn("User " + this.usernameInput + " befindet sich bereits im Chat!");
+			}
 		} else {
-			warn("User " + this.usernameInput + " wurde nicht gefunden!");
+			errorMessages.warn("User " + this.usernameInput + " wurde nicht gefunden!");
 		}
+		
 	}
 	
 	public void changeChatName() {
@@ -166,15 +186,6 @@ public class editChatBean implements Serializable{
 		}
 		
 	}
-	
-	public void warn(String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warnung!", message));
-    }
-  	
-  	public void error(String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler!", message));
-    }
-	
 	
     
     }

@@ -96,8 +96,7 @@ public class AddContactsBean implements Serializable{
 		if(contact!=null) {
 			manageContactList.addContact(userBean.getUser(),contact);
 			userBean.refreshUser();
-			contactBean.init();
-			return "success";
+			return "successAddContact";
 		}
 		return "success";
 	}

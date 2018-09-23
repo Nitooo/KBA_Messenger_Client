@@ -48,6 +48,8 @@ public class CommunicationBean implements Serializable{
     @PostConstruct
     private void init() {
     	messageList = chatBean.getChat().getMessages();
+    	
+    	
     }
 
 
@@ -157,7 +159,7 @@ public class CommunicationBean implements Serializable{
 		message.setTimestamp(timestamp);
 		message.setChat(chatBean.getChat());
 		communication.sendMessage(message);
-		
+		messageText = "";
 		chatBean.refreshChat();
 		this.init();
 		

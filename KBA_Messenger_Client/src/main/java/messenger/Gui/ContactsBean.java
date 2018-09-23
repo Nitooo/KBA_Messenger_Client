@@ -84,14 +84,6 @@ public class ContactsBean implements Serializable{
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
 	}
-
-	public String addContact() {
-		//manageContactList.addContact(userBean.getUser(),getUser.getUser(this.contactName));
-		contactName = "";
-		this.init();
-		return "success";
-		
-	}
 	
 	public String deleteContact(User contact) {
 		manageContactList.deleteContact(userBean.getUser(), contact);

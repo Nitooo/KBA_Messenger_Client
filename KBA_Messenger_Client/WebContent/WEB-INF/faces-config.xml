@@ -111,6 +111,11 @@
 	       <to-view-id>/showChatMessages.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+	       <from-outcome>userAdded</from-outcome>
+	       <to-view-id>/chatList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 	   <from-view-id>/contactList.xhtml</from-view-id>
@@ -133,7 +138,7 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
-	       <from-outcome>success</from-outcome>
+	       <from-outcome>successAddContact</from-outcome>
 	       <to-view-id>/contactList.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
@@ -169,7 +174,7 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
-	       <from-outcome>successDelete</from-outcome>
+	       <from-outcome>successDeleteUser</from-outcome>
 	       <to-view-id>/chooseUser.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
