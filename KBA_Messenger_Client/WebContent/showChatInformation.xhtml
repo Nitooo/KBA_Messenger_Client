@@ -13,53 +13,56 @@
 		<h2>
 			<h:outputText value="Informationen zum Chat" />
 		</h2>
-		
+
 		<h:form id="form">
-							 
-		<p:messages id="errorMessages" style="color:red;margin:8px;" />
-		
-		<p:button value="Chat öffnen" id="openChat"
-							 outcome="openChat" icon="ui-icon-arrowthick-1-w"  />
-							 
-		<p:button value="Chatliste öffnen" id="openChatList"
-							 outcome="openChatList" icon="ui-icon-arrowthick-1-w"  />
-		
-			<p:panelGrid id="borderGrid" columns="1" layout="grid">
-			   	<f:facet name="header">
-                    <h:outputText value="Chat"/>
-                </f:facet>
-                
-                <p:panelGrid id="borderNameGrid" columns="1">
-				   	<f:facet name="header">
-	                    <h:outputText value="Chatname"/>
-	                </f:facet>
-						<p:outputLabel value="#{chatBean.chat.getName()}" />
-					
-				</p:panelGrid>
-					
-				<p:spacer height="5" />
-				
-				<p:panelGrid id="borderAdminGrid" columns="1">
+
+			<p:messages id="errorMessages" style="color:red;margin:8px;" />
+
+			<p:button value="Chat öffnen" id="openChat" outcome="openChat"
+				icon="ui-icon-arrowthick-1-w" />
+
+			<p:button value="Chatliste öffnen" id="openChatList"
+				outcome="openChatList" icon="ui-icon-arrowthick-1-w" />
+
+			<p></p>
+
+			<p:panelGrid id="borderGrid" columns="1" layout="grid"
+				style="margin-bottom:10px;">
 				<f:facet name="header">
-	                    <h:outputText value="Admin"/>
-	                </f:facet>
-						<p:outputLabel value="#{chatBean.chat.getAdmin().getUsername()}" />
-					</p:panelGrid>
-			
-			<p:spacer height="5" />
-					
-					
-					<p:panelGrid id="borderUserGrid" columns="1">
-						<p:dataTable var="user" value="#{chatBean.chat.getUsers()}">
-					    <p:column headerText="User">
-					        <h:outputText value="#{user.getUsername()}" />
-					    </p:column>
-					</p:dataTable>
-					</p:panelGrid>
-				
-			
-					
+					<h:outputText value="Chat" />
+				</f:facet>
+
+				<p:panelGrid id="borderNameGrid" columns="1">
+					<f:facet name="header">
+						<h:outputText value="Chatname" />
+					</f:facet>
+					<p:outputLabel value="#{chatBean.chat.getName()}" />
+
 				</p:panelGrid>
+
+				<p:spacer height="5" />
+
+				<p:panelGrid id="borderAdminGrid" columns="1">
+					<f:facet name="header">
+						<h:outputText value="Admin" />
+					</f:facet>
+					<p:outputLabel value="#{chatBean.chat.getAdmin().getUsername()}" />
+				</p:panelGrid>
+
+				<p:spacer height="5" />
+
+
+				<p:panelGrid id="borderUserGrid" columns="1">
+					<p:dataTable var="user" value="#{chatBean.chat.getUsers()}">
+						<p:column headerText="User">
+							<h:outputText value="#{user.getUsername()}" />
+						</p:column>
+					</p:dataTable>
+				</p:panelGrid>
+
+
+
+			</p:panelGrid>
 		</h:form>
 	</ui:define>
 

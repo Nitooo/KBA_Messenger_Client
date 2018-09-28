@@ -13,55 +13,57 @@
 		<h2>
 			<h:outputText value="Chat anpassen" />
 		</h2>
-		
+
 		<h:form id="form">
-		<p:messages id="messages" showDetail="true" closable="true">
+			<p:messages id="messages" showDetail="true" closable="true">
 				<p:autoUpdate />
 			</p:messages>
-		
-		<p:button value="Chat öffnen" id="openChat"
-							 outcome="openChat" icon="ui-icon-arrowthick-1-w"  />
-							 
-		<p:button value="Chatliste öffnen" id="openChatList"
-							 outcome="openChatList" icon="ui-icon-arrowthick-1-w"  />
-		
-		<p:layout style="min-width:300px;min-height:300px;" >
-		<p:layoutUnit position="center">
-					
-			<p:panelGrid id="borderGrid" columns="1" layout="grid">
-			   	<f:facet name="header">
-                    <h:outputText value="Chat anpassen"/>
-                </f:facet>
-        
-					
-				<p:spacer height="10" />
-					
-				<p:panelGrid id="borderUserGrid" columns="1">
-					<f:facet name="header">
-                    	<h:outputText value="User anpassen"/>
-                	</f:facet>
-                	<p:panelGrid id="borderUserGridInfo" columns="2">
-					    
-					
-						<p:panelGrid columns="2" styleClass="noborderpanelgrid">
-							<p:column>
-							<p:inputText maxlength="64" id="addUser" value="#{editChatBean.usernameInput}"/>
-						</p:column>
-						<p:column>
-							<p:commandButton action="#{editChatBean.addUserToConversation()}"
-									value="User hinzufügen" icon="ui-icon-disk" update="@form" />
-						</p:column>
+
+			<p:button value="Chat öffnen" id="openChat" outcome="openChat"
+				icon="ui-icon-arrowthick-1-w" />
+
+			<p:button value="Chatliste öffnen" id="openChatList"
+				outcome="openChatList" icon="ui-icon-arrowthick-1-w" />
+
+			<p:layout style="min-width:300px;min-height:300px;">
+				<p:layoutUnit position="center">
+
+					<p:panelGrid id="borderGrid" columns="1" layout="grid">
+						<f:facet name="header">
+							<h:outputText value="Chat anpassen" />
+						</f:facet>
+
+
+						<p:spacer height="10" />
+
+						<p:panelGrid id="borderUserGrid" columns="1">
+							<f:facet name="header">
+								<h:outputText value="User anpassen" />
+							</f:facet>
+							<p:panelGrid id="borderUserGridInfo" columns="2">
+
+
+								<p:panelGrid columns="2" styleClass="noborderpanelgrid">
+									<p:column>
+										<p:inputText maxlength="64" id="addUser"
+											value="#{editChatBean.usernameInput}" />
+									</p:column>
+									<p:column>
+										<p:commandButton
+											action="#{editChatBean.addUserToConversation()}"
+											value="User hinzufügen" icon="ui-icon-disk" update="@form" />
+									</p:column>
+								</p:panelGrid>
+							</p:panelGrid>
+
+
 						</p:panelGrid>
+
+						<p:spacer height="10" />
+
 					</p:panelGrid>
-					
-					
-				</p:panelGrid>
-					
-				<p:spacer height="10" />
-					
-			</p:panelGrid>
-			</p:layoutUnit>
-			
+				</p:layoutUnit>
+
 			</p:layout>
 		</h:form>
 	</ui:define>

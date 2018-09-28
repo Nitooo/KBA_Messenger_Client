@@ -15,73 +15,80 @@
 			<h:outputText value="Chat: #{chatBean.chat.getName()}" />
 		</h2>
 		<h3>
-		User:  
-		<ui:repeat value="#{chatBean.chat.getUsers()}" var="user">
+			User:
+			<ui:repeat value="#{chatBean.chat.getUsers()}" var="user">
 				#{user.getUsername()} 
 		</ui:repeat>
 		</h3>
+
+		<p:button value="Chatliste öffnen" id="back" outcome="back"
+			icon="ui-icon-arrowthick-1-w" />
+		<p:layout style="min-height:500px;">
 		
-		<p:button value="Chatliste öffnen" id="back"
-							 outcome="back" icon="ui-icon-arrowthick-1-w"  />
-			<p:layout style="min-height:500px;">
+			<p></p>
 			
-				<p:layoutUnit position="center" header="#{chatBean.chat.getName()}">
-				
+			<p:layoutUnit position="center" header="#{chatBean.chat.getName()}">
+
 				<h:form id="messages">
-				
-				
-				<p:dataTable var="message" value="#{communicationBean.messageList}" sortBy="#{message.messageId}">
-			    <p:column style="width:100px;">
-			        <h:outputText value="#{message.getTimestamp()}" >
-					    <f:convertDateTime timeZone="GMT+2" pattern="dd.MM.yyyy HH:mm" />
-					</h:outputText>
-			    </p:column>
-			    <p:column style="width:100px;">
-			        <h:outputText value="#{message.getSender().getUsername()}" />
-			    </p:column>
-			    <p:column>
-			        <h:outputText value="#{message.getText()}" />
-			    </p:column>
-			</p:dataTable>
-			<div id="bottomDiv"></div>
+
+
+					<p:dataTable var="message" value="#{communicationBean.messageList}"
+						sortBy="#{message.messageId}">
+						<p:column style="width:100px;">
+							<h:outputText value="#{message.getTimestamp()}">
+								<f:convertDateTime timeZone="GMT+2" pattern="dd.MM.yyyy HH:mm" />
+							</h:outputText>
+						</p:column>
+						<p:column style="width:100px;">
+							<h:outputText value="#{message.getSender().getUsername()}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{message.getText()}" />
+						</p:column>
+					</p:dataTable>
+					<div id="bottomDiv"></div>
 				</h:form>
-					
-				</p:layoutUnit>
+
+			</p:layoutUnit>
 
 
-				<p:layoutUnit position="south">
-					<h:form id="sendMessage">
-						<p:panelGrid columns="2">
-							<p:inputText id="messageInput" required="true" label="Message Input" autoResize="true" value="#{communicationBean.messageText}"/>
-							<p:commandButton id="sendMessage" value="Senden" for="messageInput" action="#{communicationBean.sendMessage()}" update="sendMessage messages" oncomplete="scrollToBottom()"/>
-						</p:panelGrid>
-					</h:form>
-					<p:commandButton value="Aktualisieren " id="refresh" action="#{chatBean.refreshChat()}" update="messages" icon="ui-icon-arrowrefresh-1-s" oncomplete="scrollToBottom()"  />
-				</p:layoutUnit>
-				
-				<p:layoutUnit position="east">
-					<p:panelGrid id = "panel" columns="1" border = "1" rendered="#{chatBean.getChat().isGroupChat()==true}">
-						<p:button id="show"
-										 value="Informationen anzeigen" 
-										 title="Einstellung anzeigen"
-										 outcome="showInfo"/>
-						<p:button 	rendered='#{chatBean.getChat().getAdmin().getUsername()==userBean.getUser().getUsername()}'
-											action="#" id="edit"
-										 	value="Einstellungen ändern"
-										 	title="Einstellung ändern"
-										 	outcome="settings"/>
+			<p:layoutUnit position="south">
+				<h:form id="sendMessage">
+					<p:panelGrid columns="2">
+						<p:inputText id="messageInput" required="true"
+							label="Message Input" autoResize="true"
+							value="#{communicationBean.messageText}" />
+						<p:commandButton id="sendMessage" value="Senden"
+							for="messageInput" action="#{communicationBean.sendMessage()}"
+							update="sendMessage messages" oncomplete="scrollToBottom()" />
 					</p:panelGrid>
-					</p:layoutUnit>
+				</h:form>
+				<p:commandButton value="Aktualisieren " id="refresh"
+					action="#{chatBean.refreshChat()}" update="messages"
+					icon="ui-icon-arrowrefresh-1-s" oncomplete="scrollToBottom()" />
+			</p:layoutUnit>
 
-			</p:layout>
-		
-		
-		<script type="text/javascript">             
+			<p:layoutUnit position="east">
+				<p:panelGrid id="panel" columns="1" border="1"
+					rendered="#{chatBean.getChat().isGroupChat()==true}">
+					<p:button id="show" value="Informationen anzeigen"
+						title="Einstellung anzeigen" outcome="showInfo" />
+					<p:button
+						rendered='#{chatBean.getChat().getAdmin().getUsername()==userBean.getUser().getUsername()}'
+						action="#" id="edit" value="Einstellungen ändern"
+						title="Einstellung ändern" outcome="settings" />
+				</p:panelGrid>
+			</p:layoutUnit>
+
+		</p:layout>
+
+
+		<script type="text/javascript">
 			function scrollToBottom() {
 				window.location.hash = '#bottomDiv';
 			}
 		</script>
-		
+
 
 	</ui:define>
 

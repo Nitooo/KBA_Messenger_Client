@@ -13,33 +13,36 @@
 		<h2>
 			<h:outputText value="User hinzufügen" />
 		</h2>
-		
+
 		<h:form id="form">
 			<p:messages id="messages" showDetail="true" closable="true">
 				<p:autoUpdate />
 			</p:messages>
-			
+
 			<p:panelGrid id="borderGrid" columns="1">
-			   	<f:facet name="header">
-                    <h:outputText value="neuer User"/>
-                </f:facet>
-				<p:panelGrid id="userGrid" columns="2" styleClass="noborderpanelgrid">
+				<f:facet name="header">
+					<h:outputText value="neuer User" />
+				</f:facet>
+				<p:panelGrid id="userGrid" columns="2"
+					styleClass="noborderpanelgrid">
 					<p:outputLabel for="userName" value="Username" />
-					<p:inputText required="true" maxlength="64" value="#{addUserBean.username}" id="userName"/>
+					<p:inputText required="true" maxlength="64"
+						value="#{addUserBean.username}" id="userName" />
 					<p:outputLabel for="password" value="Passwort" />
-					<p:inputText required="true" maxlength="64" value="#{addUserBean.password}" id="password"/>
-					
+					<p:inputText required="true" maxlength="64"
+						value="#{addUserBean.password}" id="password" />
+
 					<p></p>
 					<h:outputText id="display" />
-					
+
 					<p></p>
 					<p:panelGrid colums="2">
-					
+
 						<p:commandButton id="save" action="#{addUserBean.addUser}"
 							value="Speichern" icon="ui-icon-disk" update="@form" />
-			
-						<p:button id="cancel" 
-							value="Abbrechen" outcome="cancel" immediate="true" icon="ui-icon-close" />
+
+						<p:button id="cancel" value="Abbrechen" outcome="cancel"
+							immediate="true" icon="ui-icon-close" />
 
 					</p:panelGrid>
 				</p:panelGrid>

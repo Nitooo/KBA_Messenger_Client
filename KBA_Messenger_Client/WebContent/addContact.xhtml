@@ -13,29 +13,34 @@
 		<h2>
 			<h:outputText value="Kontakt hinzufügen" />
 		</h2>
-		
+
 		<h:form id="form">
-		<p:messages id="errorMessages" style="color:red;margin:8px;" />
-			<p:panelGrid id="borderGrid" columns="1">
-			   	<f:facet name="header">
-                    <h:outputText value="neuer Kontakt"/>
-                </f:facet>
-				<p:panelGrid id="contactAddGrid" columns="2" styleClass="noborderpanelgrid">
+		
+			<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+			
+			<p:panelGrid id="borderGrid" columns="1" style="margin-bottom:10px;">
+				<f:facet name="header">
+					<h:outputText value="neuer Kontakt" />
+				</f:facet>
+				<p:panelGrid id="contactAddGrid" columns="2"
+					styleClass="noborderpanelgrid">
 					<p:outputLabel for="contactName" value="Kontaktname" />
 					<p:inputText required="true" maxlength="64" id="contactName"
 						value="#{addContactsBean.contactName}" />
-					
+
 					<p></p>
 					<h:outputText id="display" />
-					
+
 					<p></p>
 					<p:panelGrid colums="2">
-					
+
 						<p:commandButton id="save" action="#{addContactsBean.addContact}"
 							value="Speichern" icon="ui-icon-disk" update="@form" />
-			
-						<p:button id="cancel" 
-							value="Abbrechen" outcome="cancel" immediate="true" icon="ui-icon-close" />
+
+						<p:button id="cancel" value="Abbrechen" outcome="cancel"
+							immediate="true" icon="ui-icon-close" />
 
 					</p:panelGrid>
 				</p:panelGrid>

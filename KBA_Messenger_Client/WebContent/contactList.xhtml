@@ -20,7 +20,8 @@
 
 			<p></p>
 
-			<p:dataTable var="contact" value="#{contactsBean.contactList}" style="margin-bottom:10px;">
+			<p:dataTable var="contact" value="#{contactsBean.contactList}"
+				style="margin-bottom:10px;">
 				<p:column>
 					<f:facet name="header">Kontaktname</f:facet>
 					<h:outputText value="#{contact.getUsername()}" />

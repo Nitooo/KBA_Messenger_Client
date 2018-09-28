@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -15,11 +14,10 @@ import messenger.Domain.Chat;
 import messenger.ServiceAdapter.CommunicationAdapter;
 import messenger.ServiceAdapter.ManageChatGroupsAdapter;
 
-
 @Component
-@Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class ChatBean implements Serializable{
-	
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class ChatBean implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -30,20 +28,20 @@ public class ChatBean implements Serializable{
 
 	@Autowired
 	private ManageChatGroupsAdapter manageChatGroups;
-	
+
 	@Autowired
 	private CommunicationAdapter communication;
-	
+
 	private List<Chat> chatList;
-	
+
 	private Chat chat;
-    
-    @PostConstruct
-    private void init() {
-    	chatList = userBean.getUser().getChats();
-    }
-    
-    public ManageChatGroupsAdapter getManageChatGroups() {
+
+	@PostConstruct
+	private void init() {
+		chatList = userBean.getUser().getChats();
+	}
+
+	public ManageChatGroupsAdapter getManageChatGroups() {
 		return manageChatGroups;
 	}
 
@@ -62,7 +60,6 @@ public class ChatBean implements Serializable{
 	public UserBean getUserBean() {
 		return userBean;
 	}
-
 
 	public List<Chat> getChatList() {
 		return chatList;
@@ -85,16 +82,14 @@ public class ChatBean implements Serializable{
 	public void setUserBean(UserBean userBean) {
 		this.userBean = userBean;
 	}
-	
-	
+
 	/**
 	 * gets a new version for the selected chat from the server
 	 */
 	public void refreshChat() {
 		this.chat = communication.getChat(this.chat);
 	}
-	
-	
+
 	/**
 	 * sends updated chat to the server
 	 */
@@ -102,48 +97,50 @@ public class ChatBean implements Serializable{
 		manageChatGroups.updateConversation(this.chat);
 		refreshChat();
 	}
-	
-	public String resetChatBean(){
+
+	public String resetChatBean() {
 		userBean.refreshUser();
 		this.init();
-    	return "reset";
-    }
-	
-	
+		return "reset";
+	}
+
 	/**
 	 * sets chat before the chatinfo-page is opened
+	 * 
 	 * @param newChat
 	 * @return
 	 */
-    public String showChatInfo(Chat newChat) {
-    	this.setChat(newChat);
-        return "showInfo";
-    }
-    
-    /**
-     * sets Chat before the ChatEdit-Page is opened
-     * @param newChat
-     * @return
-     */
-    public String editGroupConversation(Chat newChat) {
-    	this.setChat(newChat);
-    	return "editGroupConversation";
-    }
-    
-    /**
-     * sets Chat before the ChatEdit-Page is opened
-     * @param newChat
-     * @return
-     */
-    public String editConversation(Chat newChat) {
-    	this.setChat(newChat);
-    	return "editConversation";
-    }
-    
-    public String deleteConversation(Chat newchat) {
+	public String showChatInfo(Chat newChat) {
+		this.setChat(newChat);
+		return "showInfo";
+	}
+
+	/**
+	 * sets Chat before the ChatEdit-Page is opened
+	 * 
+	 * @param newChat
+	 * @return
+	 */
+	public String editGroupConversation(Chat newChat) {
+		this.setChat(newChat);
+		return "editGroupConversation";
+	}
+
+	/**
+	 * sets Chat before the ChatEdit-Page is opened
+	 * 
+	 * @param newChat
+	 * @return
+	 */
+	public String editConversation(Chat newChat) {
+		this.setChat(newChat);
+		return "editConversation";
+	}
+
+	public String deleteConversation(Chat newchat) {
 		manageChatGroups.deleteConveration(newchat);
 		this.resetChatBean();
-    	return "conversationDeleted";
-    }
+		return "conversationDeleted";
+	}
 
 }

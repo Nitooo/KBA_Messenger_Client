@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,11 +15,10 @@ import messenger.ServiceAdapter.CommunicationAdapter;
 import messenger.ServiceAdapter.GetUserAdapter;
 import messenger.ServiceAdapter.ManageChatGroupsAdapter;
 
-
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class editChatBean implements Serializable{
-	
+public class editChatBean implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -29,31 +26,31 @@ public class editChatBean implements Serializable{
 
 	@Autowired
 	private UserBean userBean;
-	
+
 	@Autowired
 	private ChatBean chatBean;
 
 	@Autowired
 	private ManageChatGroupsAdapter manageChatGroups;
-	
+
 	@Autowired
 	private CommunicationAdapter communication;
-	
+
 	@Autowired
 	private GetUserAdapter getUser;
-	
+
 	ErrorMessagesGui errorMessages = new ErrorMessagesGui();
-	
+
 	private String admin;
-	
+
 	private String usernameInput;
-	
+
 	private String chatname;
-	
-    @PostConstruct
-    private void init() {  
-    	
-    }
+
+	@PostConstruct
+	private void init() {
+
+	}
 
 	public UserBean getUserBean() {
 		return userBean;
@@ -78,7 +75,7 @@ public class editChatBean implements Serializable{
 	public void setCommunication(CommunicationAdapter communication) {
 		this.communication = communication;
 	}
-    
+
 	public ChatBean getChatBean() {
 		return chatBean;
 	}
@@ -103,7 +100,6 @@ public class editChatBean implements Serializable{
 		this.admin = admin;
 	}
 
-
 	public String getUsernameInput() {
 		return usernameInput;
 	}
@@ -125,13 +121,13 @@ public class editChatBean implements Serializable{
 		userList.remove(user);
 		chatBean.getChat().setUsers(userList);
 		chatBean.updateChat();
-		
+
 	}
-	
+
 	public String addUserToConversation() {
 		User user = getUser.getUser(this.usernameInput);
-		
-		if(user!=null) {
+
+		if (user != null) {
 			List<User> userList = chatBean.getChat().getUsers();
 			userList.add(user);
 			chatBean.getChat().setUsers(userList);
@@ -144,21 +140,20 @@ public class editChatBean implements Serializable{
 			return "userAddedError";
 		}
 	}
-	
-	
+
 	public boolean checkIfUserIsInChat(User user, List<User> userList) {
 		for (User u : userList) {
-	        if (u.getUsername().equals(user.getUsername())) {
-	            return true;
-	        }
-	    }
+			if (u.getUsername().equals(user.getUsername())) {
+				return true;
+			}
+		}
 		return false;
 	}
-	
+
 	public void addUserToGroupConversation() {
 		User user = getUser.getUser(this.usernameInput);
-		
-		if(user!=null) {
+
+		if (user != null) {
 			List<User> userList = chatBean.getChat().getUsers();
 			if (!checkIfUserIsInChat(user, userList)) {
 				userList.add(user);
@@ -170,24 +165,23 @@ public class editChatBean implements Serializable{
 		} else {
 			errorMessages.warn("User " + this.usernameInput + " wurde nicht gefunden!");
 		}
-		
+
 	}
-	
+
 	public void changeChatName() {
 		chatBean.getChat().setName(this.chatname);
 		chatBean.updateChat();
 	}
-	
+
 	public void changeChatAdmin() {
 		User user = getUser.getUser(this.admin);
-		if(user!=null) {
+		if (user != null) {
 			chatBean.getChat().setAdmin(user);
 			chatBean.updateChat();
+		} else {
+			errorMessages.warn("User " + this.usernameInput + " wurde nicht gefunden!");
 		}
-		
+
 	}
-	
-    
-    }
-    
-    
+
+}

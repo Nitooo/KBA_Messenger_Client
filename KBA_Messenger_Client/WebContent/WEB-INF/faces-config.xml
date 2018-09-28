@@ -129,6 +129,11 @@
 	       <to-view-id>/chatList.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+	       <from-outcome>reset</from-outcome>
+	       <to-view-id>/contactList.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 	   <from-view-id>/addContact.xhtml</from-view-id>
@@ -141,6 +146,10 @@
 	       <from-outcome>successAddContact</from-outcome>
 	       <to-view-id>/contactList.xhtml</to-view-id>
 			<redirect />
+		</navigation-case>
+		<navigation-case>
+	       <from-outcome>success</from-outcome>
+	       <to-view-id>/addContact.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
