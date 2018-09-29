@@ -103,19 +103,27 @@ public class ChatBean implements Serializable {
 	 * gets a new version for the selected chat from the server
 	 */
 	public void refreshChat() {
-		this.chat = communication.getChat(this.chat);
+		try {
+			this.chat = communication.getChat(this.chat);
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+		}
 	}
 
 	/**
 	 * sends updated chat to the server
 	 */
 	public void updateChat() {
-		manageChatGroups.updateConversation(this.chat);
-		refreshChat();
+		try {
+			manageChatGroups.updateConversation(this.chat);
+			refreshChat();
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+		}
 	}
 
 	public String resetChatBean() {
-		
+
 		try {
 			userBean.refreshUser();
 			this.init();
@@ -164,9 +172,14 @@ public class ChatBean implements Serializable {
 	}
 
 	public String deleteConversation(Chat newchat) {
-		manageChatGroups.deleteConveration(newchat);
-		this.resetChatBean();
-		return "conversationDeleted";
+		try {
+			manageChatGroups.deleteConveration(newchat);
+			this.resetChatBean();
+			return "conversationDeleted";
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+			return "error";
+		}
 	}
 
 }

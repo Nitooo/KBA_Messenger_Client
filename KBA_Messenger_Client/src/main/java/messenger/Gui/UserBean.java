@@ -93,11 +93,23 @@ public class UserBean implements Serializable {
 	}
 
 	public String deleteUser(User user) {
-		manageContactList.deleteUserFromContacs(user);
-		userManagement.deleteUser(user);
-		this.logout();
-		this.init();
-		return "successDeleteUser";
+		
+		try {
+			manageContactList.deleteUserFromContacs(user);
+			boolean status = userManagement.deleteUser(user);
+			if(status) {
+				this.logout();
+				this.init();
+				return "successDeleteUser";
+			} else {
+				errorMessages.error("Beim löschen des Users ist ein Fehler aufgetreten!");
+				return "error";
+			}
+			
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+			return "error";
+		}
 	}
 
 	public String logout() {

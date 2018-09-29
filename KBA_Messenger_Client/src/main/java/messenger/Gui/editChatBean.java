@@ -134,6 +134,7 @@ public class editChatBean implements Serializable {
 			chatBean.getChat().setName(userBean.getUser().getUsername() + " - " + user.getUsername());
 			chatBean.updateChat();
 			chatBean.resetChatBean();
+			this.usernameInput = "";
 			return "userAdded";
 		} else {
 			errorMessages.warn("User " + this.usernameInput + " wurde nicht gefunden!");
@@ -179,7 +180,7 @@ public class editChatBean implements Serializable {
 			chatBean.getChat().setAdmin(user);
 			chatBean.updateChat();
 		} else {
-			errorMessages.warn("User " + this.usernameInput + " wurde nicht gefunden!");
+			errorMessages.warn("User " + this.admin + " wurde nicht gefunden!");
 		}
 
 	}

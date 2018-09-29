@@ -31,6 +31,8 @@ public class ContactsBean implements Serializable {
 
 	@Autowired
 	private ManageContactList manageContactList;
+	
+	private ErrorMessagesGui errorMessages = new ErrorMessagesGui();
 
 	private Set<User> contactList;
 
@@ -82,9 +84,15 @@ public class ContactsBean implements Serializable {
 	}
 
 	public String deleteContact(User contact) {
-		manageContactList.deleteContact(userBean.getUser(), contact);
-		userBean.refreshUser();
-		return "reset";
+
+		try {
+			manageContactList.deleteContact(userBean.getUser(), contact);
+			userBean.refreshUser();
+			return "reset";
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+			return "error";
+		}
 	}
 
 }

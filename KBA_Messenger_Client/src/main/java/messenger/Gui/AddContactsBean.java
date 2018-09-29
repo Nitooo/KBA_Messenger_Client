@@ -30,7 +30,7 @@ public class AddContactsBean implements Serializable {
 
 	@Autowired
 	private ManageContactList manageContactList;
-	
+
 	ErrorMessagesGui errorMessages = new ErrorMessagesGui();
 
 	private String contactName;
@@ -72,23 +72,28 @@ public class AddContactsBean implements Serializable {
 	}
 
 	public String addContact() {
-		if (!this.contactName.equals(userBean.getUser().getUsername())) {
-			
-			User contact = getUser.getUser(this.contactName);
-			if (contact != null) {
+
+		try {
+			if (!this.contactName.equals(userBean.getUser().getUsername())) {
+
+				User contact = getUser.getUser(this.contactName);
+				if (contact != null) {
 					manageContactList.addContact(userBean.getUser(), contact);
 					userBean.refreshUser();
 					return "successAddContact";
-			}else {
-				errorMessages.warn("User " + this.contactName + " wurde nicht gefunden!");
+				} else {
+					errorMessages.warn("User " + this.contactName + " wurde nicht gefunden!");
+					return "error";
+				}
+
+			} else {
+				errorMessages.warn("Sie können sich nicht selbst als Kontakt hinzufügen!");
 				return "error";
 			}
-			
-		} else {
-			errorMessages.warn("Sie können sich nicht selbst als Kontakt hinzufügen!");
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
 			return "error";
 		}
-
 	}
 
 }

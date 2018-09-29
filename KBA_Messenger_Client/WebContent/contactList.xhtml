@@ -17,7 +17,11 @@
 
 			<p:button value="Zurück" id="back" outcome="back"
 				icon="ui-icon-arrowthick-1-w" />
-
+			
+			<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+			
 			<p></p>
 
 			<p:dataTable var="contact" value="#{contactsBean.contactList}"

@@ -27,6 +27,8 @@ public class AddChatBean implements Serializable {
 	@Autowired
 	private ManageChatGroupsAdapter manageChatGroups;
 
+	private ErrorMessagesGui errorMessages = new ErrorMessagesGui();
+
 	String chatname;
 
 	public String getChatname() {
@@ -50,14 +52,25 @@ public class AddChatBean implements Serializable {
 	}
 
 	public String addGroupConversation() {
-		manageChatGroups.addGroupConversation(userBean.getUser(), this.chatname);
-		chatBean.resetChatBean();
-		return "successAddGroupChat";
+		try {
+			manageChatGroups.addGroupConversation(userBean.getUser(), this.chatname);
+			chatBean.resetChatBean();
+			return "successAddGroupChat";
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+			return "error";
+		}
+
 	}
 
 	public String addConversation() {
-		manageChatGroups.addConversation(userBean.getUser());
-		chatBean.resetChatBean();
-		return "successAddChat";
+		try {
+			manageChatGroups.addConversation(userBean.getUser());
+			chatBean.resetChatBean();
+			return "successAddChat";
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+			return "error";
+		}
 	}
 }

@@ -27,6 +27,8 @@ public class AddUserBean implements Serializable {
 	@Autowired
 	private UserManagementAdapter userManagement;
 
+	ErrorMessagesGui errorMessages = new ErrorMessagesGui();
+
 	public String getUsername() {
 		return username;
 	}
@@ -60,27 +62,23 @@ public class AddUserBean implements Serializable {
 	}
 
 	public String addUser() {
-		int status = userManagement.addUser(username, password);
-		if (status == 0) {
-			userBean.init();
-			return "success";
-		} else if (status == 1) {
-			warn("User existiert bereits!");
-			return "addUser";
-		} else {
-			error("Ein Fehler ist Aufgetreten, bitte kontaktiern Sie den Admin!");
-			return "addUser";
+		
+		try {
+			int status = userManagement.addUser(username, password);
+			if (status == 0) {
+				userBean.init();
+				return "success";
+			} else if (status == 1) {
+				errorMessages.warn("User existiert bereits!");
+				return "error";
+			} else {
+				errorMessages.error("Ein Fehler ist Aufgetreten, bitte kontaktiern Sie den Admin!");
+				return "error";
+			}
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+			return "error";
 		}
-	}
-
-	public void warn(String message) {
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_WARN, "Warnung!", message));
-	}
-
-	public void error(String message) {
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler!", message));
 	}
 
 }

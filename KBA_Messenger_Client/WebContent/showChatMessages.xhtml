@@ -25,11 +25,15 @@
 			icon="ui-icon-arrowthick-1-w" />
 		<p:layout style="min-height:500px;">
 		
+		<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+		</p:messages>
+		
 			<p></p>
 			
 			<p:layoutUnit position="center" header="#{chatBean.chat.getName()}">
 
-				<h:form id="messages">
+				<h:form id="chatmessages">
 
 
 					<p:dataTable var="message" value="#{communicationBean.messageList}"
@@ -60,11 +64,11 @@
 							value="#{communicationBean.messageText}" />
 						<p:commandButton id="sendMessage" value="Senden"
 							for="messageInput" action="#{communicationBean.sendMessage()}"
-							update="sendMessage messages" oncomplete="scrollToBottom()" />
+							update="sendMessage chatmessages" oncomplete="scrollToBottom()" />
 					</p:panelGrid>
 				</h:form>
 				<p:commandButton value="Aktualisieren " id="refresh"
-					action="#{chatBean.refreshChat()}" update="messages"
+					action="#{chatBean.refreshChat()}" update="chatmessages"
 					icon="ui-icon-arrowrefresh-1-s" oncomplete="scrollToBottom()" />
 			</p:layoutUnit>
 

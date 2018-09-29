@@ -16,7 +16,9 @@
 
 		<h:form id="form">
 
-			<p:messages id="errorMessages" style="color:red;margin:8px;" />
+			<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+			</p:messages>
 
 			<p:button value="Chat öffnen" id="openChat" outcome="openChat"
 				icon="ui-icon-arrowthick-1-w" />
