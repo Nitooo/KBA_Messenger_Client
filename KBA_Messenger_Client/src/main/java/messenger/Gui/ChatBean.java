@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.ResourceAccessException;
 
 import messenger.Domain.Chat;
 import messenger.ServiceAdapter.CommunicationAdapter;
@@ -32,13 +33,19 @@ public class ChatBean implements Serializable {
 	@Autowired
 	private CommunicationAdapter communication;
 
+	ErrorMessagesGui errorMessages = new ErrorMessagesGui();
+
 	private List<Chat> chatList;
 
 	private Chat chat;
 
 	@PostConstruct
 	private void init() {
-		chatList = userBean.getUser().getChats();
+		try {
+			chatList = userBean.getUser().getChats();
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+		}
 	}
 
 	public ManageChatGroupsAdapter getManageChatGroups() {
@@ -70,9 +77,18 @@ public class ChatBean implements Serializable {
 	}
 
 	public String setChat(Chat newChat) {
-		this.chat = newChat;
-		refreshChat();
-		return "openChat";
+		try {
+			this.chat = newChat;
+			refreshChat();
+			return "openChat";
+		} catch (ResourceAccessException e) {
+			errorMessages.error("Verbindung mit Server ist nicht möglich!");
+			return "error";
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+			return "error";
+		}
+
 	}
 
 	public void setChatList(List<Chat> chatList) {
@@ -99,9 +115,19 @@ public class ChatBean implements Serializable {
 	}
 
 	public String resetChatBean() {
-		userBean.refreshUser();
-		this.init();
-		return "reset";
+		
+		try {
+			userBean.refreshUser();
+			this.init();
+			return "reset";
+		} catch (ResourceAccessException e) {
+			errorMessages.error("Verbindung mit Server ist nicht möglich!");
+			return "error";
+		} catch (Exception e) {
+			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
+			return "error";
+		}
+
 	}
 
 	/**

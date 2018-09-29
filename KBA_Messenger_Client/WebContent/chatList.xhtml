@@ -19,9 +19,12 @@
 				action="#{chatBean.resetChatBean()}" icon="ui-icon-arrowrefresh-1-s"
 				update="form" />
 
+			<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+
 			<p></p>
 
-			<p:messages id="errorMessages" style="color:red;margin:8px;" />
 			<p:panel header="Gruppenchats" style="margin-bottom:10px;">
 				<p:dataTable var="chat" value="#{chatBean.chatList}" border="1"
 					cellpadding="10" cellspacing="1">

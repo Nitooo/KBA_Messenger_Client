@@ -6,7 +6,7 @@
   <artifactId>MessengerMaven</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 	<build>
-	    <finalName>JerseyHelloWorld</finalName>
+	    <finalName>kba-messenger</finalName>
 	    <plugins>
 	        <plugin>
 	          <artifactId>maven-compiler-plugin</artifactId>

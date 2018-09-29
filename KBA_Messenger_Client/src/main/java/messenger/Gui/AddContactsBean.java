@@ -81,12 +81,12 @@ public class AddContactsBean implements Serializable {
 					return "successAddContact";
 			}else {
 				errorMessages.warn("User " + this.contactName + " wurde nicht gefunden!");
-				return "success";
+				return "error";
 			}
 			
 		} else {
-			errorMessages.warn("Sie können sich nicht selbst als User hinzufügen!");
-			return "success";
+			errorMessages.warn("Sie können sich nicht selbst als Kontakt hinzufügen!");
+			return "error";
 		}
 
 	}
