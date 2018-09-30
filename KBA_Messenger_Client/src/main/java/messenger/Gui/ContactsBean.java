@@ -82,7 +82,14 @@ public class ContactsBean implements Serializable {
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
 	}
-
+	
+	/**
+	 * creates Message and sends it using REST
+	 * 
+	 * @param Contact that should be deleted
+	 * 
+	 * @return is used for navigation(faces-config.xml)
+	 */
 	public String deleteContact(User contact) {
 
 		try {

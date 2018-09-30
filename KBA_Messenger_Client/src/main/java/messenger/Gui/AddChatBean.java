@@ -51,6 +51,11 @@ public class AddChatBean implements Serializable {
 		return userBean;
 	}
 
+	/**
+	 * adds Groupconversation
+	 * 
+	 * @return is used for navigation(faces-config.xml)
+	 */
 	public String addGroupConversation() {
 		try {
 			manageChatGroups.addGroupConversation(userBean.getUser(), this.chatname);
@@ -63,6 +68,11 @@ public class AddChatBean implements Serializable {
 
 	}
 
+	/**
+	 * adds Groupconversation
+	 * 
+	 * @return is used for navigation(faces-config.xml)
+	 */
 	public String addConversation() {
 		try {
 			manageChatGroups.addConversation(userBean.getUser());

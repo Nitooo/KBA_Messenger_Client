@@ -107,6 +107,12 @@ public class CommunicationBean implements Serializable {
 		this.message = message;
 	}
 
+	
+	/**
+	 * creates Message and sends it using REST
+	 * 
+	 * @return is used for navigation(faces-config.xml)
+	 */
 	public void sendMessage() {
 		
 		try {

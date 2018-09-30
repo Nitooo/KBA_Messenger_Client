@@ -121,7 +121,12 @@ public class ChatBean implements Serializable {
 			errorMessages.error("Es ist ein kritischer Fehler aufgetreten!");
 		}
 	}
-
+	
+	/**
+	 * refreshes Chatbean to get up-to-date versions of Chats
+	 * 
+	 * @return is used for navigation(faces-config.xml)
+	 */
 	public String resetChatBean() {
 
 		try {
@@ -141,8 +146,9 @@ public class ChatBean implements Serializable {
 	/**
 	 * sets chat before the chatinfo-page is opened
 	 * 
-	 * @param newChat
-	 * @return
+	 * @param newChat - Chat that should be opened
+	 * 
+	 * @return is used for navigation(faces-config.xml)
 	 */
 	public String showChatInfo(Chat newChat) {
 		this.setChat(newChat);
@@ -152,8 +158,9 @@ public class ChatBean implements Serializable {
 	/**
 	 * sets Chat before the ChatEdit-Page is opened
 	 * 
-	 * @param newChat
-	 * @return
+	 * @param newChat - Chat that should be opened
+	 * 
+	 * @return is used for navigation(faces-config.xml)
 	 */
 	public String editGroupConversation(Chat newChat) {
 		this.setChat(newChat);
@@ -163,14 +170,22 @@ public class ChatBean implements Serializable {
 	/**
 	 * sets Chat before the ChatEdit-Page is opened
 	 * 
-	 * @param newChat
-	 * @return
+	 * @param newChat - Chat that should be opened
+	 * 
+	 * @return is used for navigation(faces-config.xml)
 	 */
 	public String editConversation(Chat newChat) {
 		this.setChat(newChat);
 		return "editConversation";
 	}
-
+	
+	/**
+	 * delete Chat
+	 * 
+	 * @param newChat - Chat that should be deleted
+	 * 
+	 * @return is used for navigation(faces-config.xml)
+	 */
 	public String deleteConversation(Chat newchat) {
 		try {
 			manageChatGroups.deleteConveration(newchat);

@@ -87,11 +87,19 @@ public class UserBean implements Serializable {
 		this.user = user;
 		return "success";
 	}
-
+	
+	/**
+	 * get up-to-date version of User
+	 */
 	public void refreshUser() {
 		this.user = userManagement.getUserById(this.user.getUserId());
 	}
-
+	
+	/**
+	 * deletes user
+	 * 
+	 * @return is used for navigation(faces-config.xml)
+	 */
 	public String deleteUser(User user) {
 		
 		try {

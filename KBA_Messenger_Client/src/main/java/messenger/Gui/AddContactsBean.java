@@ -70,7 +70,13 @@ public class AddContactsBean implements Serializable {
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
 	}
-
+	
+	
+	/**
+	 * saves contact on client
+	 * 
+	 * @return is used for navigation(faces-config.xml)
+	 */
 	public String addContact() {
 
 		try {

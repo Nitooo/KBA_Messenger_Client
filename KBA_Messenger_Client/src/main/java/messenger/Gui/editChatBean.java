@@ -116,6 +116,11 @@ public class editChatBean implements Serializable {
 		this.chatname = chatname;
 	}
 
+	/**
+	 * deletes User from Chat
+	 * 
+	 * @param User that should be deleted
+	 */
 	public void deleteUserFromChat(User user) {
 		List<User> userList = chatBean.getChat().getUsers();
 		userList.remove(user);
@@ -124,6 +129,11 @@ public class editChatBean implements Serializable {
 
 	}
 
+	/**
+	 * adds User to Conversation
+	 * 
+	 * @return is used for navigation(faces-config.xml)
+	 */
 	public String addUserToConversation() {
 		User user = getUser.getUser(this.usernameInput);
 
@@ -142,6 +152,15 @@ public class editChatBean implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 * checks if a user is in a list of users an returns boolean
+	 * 
+	 * @param user
+	 * @param userList
+	 * 
+	 * @return true: if user is in chat, false: user is not in chat
+	 */
 	public boolean checkIfUserIsInChat(User user, List<User> userList) {
 		for (User u : userList) {
 			if (u.getUsername().equals(user.getUsername())) {
@@ -151,6 +170,11 @@ public class editChatBean implements Serializable {
 		return false;
 	}
 
+	/**
+	 * adds User to Groupconversation
+	 * 
+	 * @return is used for navigation(faces-config.xml)
+	 */
 	public void addUserToGroupConversation() {
 		User user = getUser.getUser(this.usernameInput);
 
@@ -169,11 +193,17 @@ public class editChatBean implements Serializable {
 
 	}
 
+	/**
+	 * changes the name of a chat
+	 */
 	public void changeChatName() {
 		chatBean.getChat().setName(this.chatname);
 		chatBean.updateChat();
 	}
 
+	/**
+	 * changes the admin of a chat
+	 */
 	public void changeChatAdmin() {
 		User user = getUser.getUser(this.admin);
 		if (user != null) {

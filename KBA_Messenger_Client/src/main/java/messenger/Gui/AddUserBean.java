@@ -2,9 +2,6 @@ package messenger.Gui;
 
 import java.io.Serializable;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -61,8 +58,13 @@ public class AddUserBean implements Serializable {
 		this.userManagement = userManagement;
 	}
 
+	/**
+	 * adds User
+	 * 
+	 * @return is used for navigation(faces-config.xml)
+	 */
 	public String addUser() {
-		
+
 		try {
 			int status = userManagement.addUser(username, password);
 			if (status == 0) {
